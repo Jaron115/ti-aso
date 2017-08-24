@@ -19,7 +19,7 @@ public class ClientLogin extends VerticalLayout implements View {
     public ClientLogin(){
 
 
-        
+
     }
 
     @Override
