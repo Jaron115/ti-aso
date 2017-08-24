@@ -1,4 +1,4 @@
-package Frontend.guest;
+package Frontend.Guest;
 
 import com.vaadin.navigator.View;
 import com.vaadin.ui.VerticalLayout;

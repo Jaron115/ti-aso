@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Frontend.guest;
+package Frontend.Guest;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
