@@ -55,6 +55,7 @@ public class ClientLogin extends VerticalLayout implements View {
 
         HLayoutButton.setSpacing(true);
         HLayoutButton.setWidth("100%");
+        HLayoutButton.setHeight("100%");
         HLayoutButton.setComponentAlignment(clientButtonLogIn, Alignment.MIDDLE_CENTER);
 
 
@@ -65,6 +66,7 @@ public class ClientLogin extends VerticalLayout implements View {
         //Panel
         Panel loginPanel = new Panel("Logowanie - Klient", formLayout);
         loginPanel.setWidth("1250");
+        loginPanel.setStyleName("clientPanel");
 
         //Add Components
         addComponent(loginPanel);

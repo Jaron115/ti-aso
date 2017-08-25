@@ -4,6 +4,7 @@ import javax.servlet.annotation.WebServlet;
 
 import Frontend.Guest.ClientLogin;
 import Frontend.Guest.Index;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -21,6 +22,7 @@ import com.vaadin.ui.UI;
  */
 @Theme("mytheme")
 @Widgetset("com.mycompany.vaadin_tutorial.MyAppWidgetset")
+@StyleSheet({"https://fonts.googleapis.com/css?family=Lato:400,700,900&subset=latin-ext"})
 public class MyUI extends UI {
 
     @Override

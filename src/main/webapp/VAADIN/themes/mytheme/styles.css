@@ -1631,6 +1631,10 @@ div.v-layout.v-horizontal.v-widget {
 	vertical-align: top;
 }
 
+.mytheme {
+	font-family: "Lato", sans-serif;
+}
+
 .mytheme.v-app, .mytheme.v-app-loading {
 	font: 300 16px/1.55 "Open Sans", sans-serif;
 	color: #464646;
@@ -14767,8 +14771,47 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
-.mytheme .v-panel-caption {
+.mytheme .v-panel-captionwrap {
+	margin-top: 0 !important;
+}
+
+.mytheme .v-panel-captionwrap .v-panel-caption {
 	border-bottom: 0;
 	text-align: center;
-	font-size: 20px;
+	color: #333333;
+	font-size: 30px;
+	text-transform: uppercase;
+	font-family: "Lato", sans-serif;
+	font-weight: 900;
+}
+
+.mytheme .v-textfield {
+	border: 1px solid #d8d8d8;
+	padding: 15px 10px;
+	border-radius: 8px;
+	height: auto;
+}
+
+.mytheme .v-textfield:focus {
+	border: 1px solid #d8d8d8;
+	box-shadow: none;
+}
+
+.mytheme .v-button {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	max-width: 300px;
+	border: 1px solid #d8d8d8;
+	padding: 15px 10px;
+	background: transparent;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	border-radius: 8px;
+	height: auto;
+}
+
+.mytheme .v-button:hover {
+	color: #ffffff;
+	background: #333333;
 }
