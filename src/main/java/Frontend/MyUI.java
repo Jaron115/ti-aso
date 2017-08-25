@@ -2,6 +2,7 @@ package Frontend;
 
 import javax.servlet.annotation.WebServlet;
 
+import Frontend.Guest.ClientLogin;
 import Frontend.Guest.Index;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -29,9 +30,11 @@ public class MyUI extends UI {
         //Index
         navigator.addView("index", new Index());
 
+        //Client login
+        navigator.addView("clientLogin", new ClientLogin());
 
         //Begin login view
-        navigator.navigateTo("index");
+        navigator.navigateTo("clientLogin");
     }
  
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
