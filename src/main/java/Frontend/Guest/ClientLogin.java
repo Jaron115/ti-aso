@@ -23,6 +23,10 @@ public class ClientLogin extends VerticalLayout implements View {
 
         //Grid Layout
         GridLayout grid = new GridLayout(3, 1);
+        grid.setWidth("100%");
+        grid.setColumnExpandRatio(0,1);
+        grid.setColumnExpandRatio(1,3);
+        grid.setColumnExpandRatio(2,1);
 
         //UI Elements
         clientLogin = new TextField();
@@ -45,7 +49,6 @@ public class ClientLogin extends VerticalLayout implements View {
         HLayoutInputs.addComponent(clientLogin);
         HLayoutInputs.addComponent(clientPassword);
 
-        HLayoutInputs.setSpacing(true);
         HLayoutInputs.setWidth("100%");
 
         //Add Horizontal layout - button
@@ -53,7 +56,6 @@ public class ClientLogin extends VerticalLayout implements View {
 
         HLayoutButton.addComponent(clientButtonLogIn);
 
-        HLayoutButton.setSpacing(true);
         HLayoutButton.setWidth("100%");
         HLayoutButton.setHeight("100%");
         HLayoutButton.setComponentAlignment(clientButtonLogIn, Alignment.MIDDLE_CENTER);
@@ -61,16 +63,31 @@ public class ClientLogin extends VerticalLayout implements View {
 
         //Form Layout
         FormLayout formLayout = new FormLayout(HLayoutInputs, HLayoutButton);
-        formLayout.setMargin(true);
 
-        //Panel
+        //Panel - login
         Panel loginPanel = new Panel("Logowanie - Klient", formLayout);
-        loginPanel.setWidth("1250");
+        loginPanel.setWidth("100%");
         loginPanel.setStyleName("clientPanel");
 
+        //Panel - test
+        Panel testPanel = new Panel("hgegeg");
+        testPanel.setWidth("100%");
+
+        //Panel - test
+        Panel test2Panel = new Panel("hgesdgsdggeg");
+        test2Panel.setWidth("100%");
+
+
+
+        grid.addComponent(testPanel);
+        grid.addComponent(loginPanel);
+        grid.addComponent(test2Panel);
+        grid.setSpacing(true);
+        grid.setMargin(true);
+
         //Add Components
-        addComponent(loginPanel);
-        setComponentAlignment(loginPanel, Alignment.TOP_CENTER);
+        addComponent(grid);
+        setComponentAlignment(grid, Alignment.TOP_LEFT);
         setHeight("100%");
         setWidth("100%");
     }

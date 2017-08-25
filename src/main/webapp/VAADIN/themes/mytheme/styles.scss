@@ -11,7 +11,20 @@
 
   font-family: "Lato", sans-serif;
 
-  .v-slot-clientPanel{
+  .v-verticallayout{
+    padding: 0!important;
+  }
+
+  .v-formlayout-captioncell, .v-formlayout-errorcell{
+    display: none!important;
+  }
+
+  .clientPanel{
+    padding: 30px;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 0 40px -15px rgba(0, 0, 0, 0.7);
+
     .v-panel-captionwrap{
       margin-top: 0!important;
 

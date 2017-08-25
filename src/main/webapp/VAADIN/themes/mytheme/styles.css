@@ -14771,11 +14771,26 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
-.mytheme .v-panel-captionwrap {
+.mytheme .v-verticallayout {
+	padding: 0 !important;
+}
+
+.mytheme .v-formlayout-captioncell, .mytheme .v-formlayout-errorcell {
+	display: none !important;
+}
+
+.mytheme .clientPanel {
+	padding: 30px;
+	border-radius: 8px;
+	background: #ffffff;
+	box-shadow: 0 0 40px -15px rgba(0, 0, 0, 0.7);
+}
+
+.mytheme .clientPanel .v-panel-captionwrap {
 	margin-top: 0 !important;
 }
 
-.mytheme .v-panel-captionwrap .v-panel-caption {
+.mytheme .clientPanel .v-panel-captionwrap .v-panel-caption {
 	border-bottom: 0;
 	text-align: center;
 	color: #333333;
@@ -14785,19 +14800,19 @@ div.v-layout.v-horizontal.v-widget {
 	font-weight: 900;
 }
 
-.mytheme .v-textfield {
+.mytheme .clientPanel .v-textfield {
 	border: 1px solid #d8d8d8;
 	padding: 15px 10px;
 	border-radius: 8px;
 	height: auto;
 }
 
-.mytheme .v-textfield:focus {
+.mytheme .clientPanel .v-textfield:focus {
 	border: 1px solid #d8d8d8;
 	box-shadow: none;
 }
 
-.mytheme .v-button {
+.mytheme .clientPanel .v-button {
 	display: block;
 	width: 100%;
 	margin: 0 auto;
@@ -14811,7 +14826,7 @@ div.v-layout.v-horizontal.v-widget {
 	height: auto;
 }
 
-.mytheme .v-button:hover {
+.mytheme .clientPanel .v-button:hover {
 	color: #ffffff;
 	background: #333333;
 }
