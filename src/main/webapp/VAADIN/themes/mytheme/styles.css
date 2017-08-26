@@ -14775,6 +14775,10 @@ div.v-layout.v-horizontal.v-widget {
 	outline: none;
 }
 
+.mytheme .v-panel {
+	border: none;
+}
+
 .mytheme .v-verticallayout {
 	padding: 0 !important;
 }
@@ -14805,6 +14809,7 @@ div.v-layout.v-horizontal.v-widget {
 	color: #333333;
 	box-shadow: none;
 	font-size: 30px;
+	line-height: 1.3;
 	background: transparent;
 	text-transform: uppercase;
 	font-family: "Lato", sans-serif;
@@ -14835,6 +14840,7 @@ div.v-layout.v-horizontal.v-widget {
 	transition: all 0.5s;
 	border-radius: 8px;
 	height: auto;
+	box-shadow: none;
 }
 
 .mytheme .clientPanel .v-button:hover, .mytheme .employeePanel .v-button:hover, .mytheme .registerPanel .v-button:hover {
@@ -14843,5 +14849,72 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .clientPanel .v-button:focus:after, .mytheme .employeePanel .v-button:focus:after, .mytheme .registerPanel .v-button:focus:after {
+	border: #d8d8d8;
+	box-shadow: none;
+}
+
+.mytheme .mainMenuPanel, .mytheme .employeeMenuPanel, .mytheme .clientMenuPanel {
+	padding-top: 0 !important;
+}
+
+.mytheme .mainMenuPanel .v-panel-captionwrap, .mytheme .employeeMenuPanel .v-panel-captionwrap, .mytheme .clientMenuPanel .v-panel-captionwrap {
+	margin-top: 0 !important;
+}
+
+.mytheme .mainMenuPanel .v-panel-captionwrap .v-panel-caption, .mytheme .employeeMenuPanel .v-panel-captionwrap .v-panel-caption, .mytheme .clientMenuPanel .v-panel-captionwrap .v-panel-caption {
+	border-bottom: 0;
+	box-shadow: none;
+	width: 100%;
+	background: #333333;
+	padding: 15px 10px;
+	margin-bottom: 0;
+	border-radius: 8px 8px 0 0;
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 1.3;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: "Lato", sans-serif;
+	font-weight: 500;
+}
+
+.mytheme .mainMenuPanel .v-slot + .v-slot, .mytheme .employeeMenuPanel .v-slot + .v-slot, .mytheme .clientMenuPanel .v-slot + .v-slot {
+	border-top: 1px solid #d8d8d8;
+}
+
+.mytheme .mainMenuPanel .v-button, .mytheme .employeeMenuPanel .v-button, .mytheme .clientMenuPanel .v-button {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
 	border: none;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	height: auto;
+	box-shadow: none;
+	padding: 15px 10px;
+	font-size: 14px;
+	background: #ffffff;
+	text-transform: uppercase;
+	font-weight: 500;
+	text-align: center;
+	color: #333333;
+}
+
+.mytheme .mainMenuPanel .v-button:hover, .mytheme .employeeMenuPanel .v-button:hover, .mytheme .clientMenuPanel .v-button:hover {
+	background: #ffe52e;
+}
+
+.mytheme .mainMenuPanel .v-button:focus:after, .mytheme .employeeMenuPanel .v-button:focus:after, .mytheme .clientMenuPanel .v-button:focus:after {
+	border: none;
+	box-shadow: none;
+}
+
+.mytheme .employeeMenuPanel .v-panel-captionwrap .v-panel-caption, .mytheme .clientMenuPanel .v-panel-captionwrap .v-panel-caption {
+	padding: 10px;
+	font-size: 14px;
+}
+
+.mytheme .employeeMenuPanel .v-button, .mytheme .clientMenuPanel .v-button {
+	padding: 10px;
+	font-size: 12px;
 }

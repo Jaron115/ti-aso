@@ -29,6 +29,7 @@ public class Index extends VerticalLayout implements View {
         //Panel - guest menu
         MainMenu mainMenu = new MainMenu();
         VerticalLayout menuLayout = mainMenu.MainMenuLayout();
+        menuLayout.setSpacing(false);
         Panel mainMenuPanel = new Panel("Menu główne", menuLayout);
         mainMenuPanel.setWidth("100%");
         mainMenuPanel.setStyleName("mainMenuPanel");
@@ -36,6 +37,7 @@ public class Index extends VerticalLayout implements View {
         //Panel - client menu
         ClientMenuPanel clientMenu = new ClientMenuPanel();
         VerticalLayout menuLayoutClient = clientMenu.ClientMenuLayout();
+        menuLayoutClient.setSpacing(false);
         Panel clientMenuPanel = new Panel("Panel klienta", menuLayoutClient);
         clientMenuPanel.setWidth("100%");
         clientMenuPanel.setStyleName("clientMenuPanel");
@@ -43,6 +45,7 @@ public class Index extends VerticalLayout implements View {
         //Panel - employee menu
         EmployeeMenuPanel employeeMenu = new EmployeeMenuPanel();
         VerticalLayout menuLayoutEmployee = employeeMenu.EmployeenMenuLayout();
+        menuLayoutEmployee.setSpacing(false);
         Panel employeeMenuPanel = new Panel("Panel pracownika", menuLayoutEmployee);
         clientMenuPanel.setWidth("100%");
         clientMenuPanel.setStyleName("employeeMenuPanel");
