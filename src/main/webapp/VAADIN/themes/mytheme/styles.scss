@@ -11,6 +11,7 @@
 
   font-family: "Lato", sans-serif;
 
+  //START CLEANING BAD STYLES
   .v-verticallayout{
     padding: 0!important;
   }
@@ -18,8 +19,10 @@
   .v-formlayout-captioncell, .v-formlayout-errorcell{
     display: none!important;
   }
+  //END CLEANING BAD STYLES
 
-  .clientPanel{
+  /*START CLIENT, EMPLOYEE AND REGISTER PANEL*/
+  .clientPanel, .employeePanel, .registerPanel{
     padding: 30px;
     border-radius: 8px;
     background: #ffffff;
@@ -32,7 +35,9 @@
         border-bottom: 0;
         text-align: center;
         color: #333333;
+        box-shadow: none;
         font-size: 30px;
+        background: transparent;
         text-transform: uppercase;
         font-family: "Lato", sans-serif;
         font-weight: 900;
@@ -70,4 +75,5 @@
       }
     }
   }
+  /*END CLIENT, EMPLOYEE AND REGISTER PANEL*/
 }

@@ -18,7 +18,7 @@ public class ClientLogin extends VerticalLayout implements View {
     TextField clientLogin;
     PasswordField clientPassword;
     Button clientButtonLogIn;
-    
+
     public ClientLogin(){
 
         //Grid Layout

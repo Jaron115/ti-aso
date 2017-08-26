@@ -5,10 +5,30 @@
  */
 package Backend;
 
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.SQLException;
+
+
 
 public class MainSystem {
+
+    Connection conn = null;
+
+    private PreparedStatement preparedStatement = null;
+    private ResultSet rs=null;
+
+    public void test() throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Select("","Klient","");
+
+    }
+
 
     /*
     *   STATIC VARIABLES
