@@ -85,6 +85,26 @@ public class MainSystem {
     /*
     EMPLOYEE LOGIN
      */
+    public boolean employeeLogin(String login, String password) throws SQLException {
+        boolean loginStatus = false;
+
+        DbConnection db = new DbConnection();
+
+        ResultSet rs = db.Select("count(*) AS employeeCount, id", "Pracownik", "login = '" + login + "' AND haslo = '" + password + "'");
+
+        while(rs.next()){
+            if(rs.getInt("employeeCount") > 0){
+                setUserID(rs.getInt("id"));
+                setUserType("employee");
+
+                loginStatus = true;
+            }
+        }
+
+        db.closeConnection();
+
+        return loginStatus;
+    }
 
     /*
     USER LOGOUT
@@ -106,6 +126,12 @@ public class MainSystem {
                 "imie, nazwisko, adres, email, login, haslo",
                 "'" + name + "', '" + lastName + "', '" + address + "', '" + email + "', '" + login + "', '" + password + "'"
         );
+
+//        db.Insert(
+//                "Pracownik",
+//                "imie, nazwisko, adres, stanowisko, wynagrodzenie, login, haslo",
+//                "'" + name + "', '" + lastName + "', '" + address + "', 'mechanik', '3000', '" + login + "', '" + password + "'"
+//        );
 
         db.closeConnection();
     }

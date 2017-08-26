@@ -3,6 +3,8 @@ package Frontend;
 import javax.servlet.annotation.WebServlet;
 
 import Backend.MainSystem;
+import Frontend.Client.*;
+import Frontend.Employee.*;
 import Frontend.Guest.*;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Theme;
@@ -31,6 +33,10 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         Navigator navigator = new Navigator(this,this);
 
+        /*
+        GUEST VIEWS
+         */
+
         //Index
         navigator.addView("index", new Index());
 
@@ -45,6 +51,47 @@ public class MyUI extends UI {
 
         //Guest service list
         navigator.addView("guestServicesList", new ServicesList());
+
+        /*
+        CLIENT VIEWS
+         */
+
+        //Client institution list
+        navigator.addView("clientInstitutionList", new InstitutionList());
+
+        //Client service list
+        navigator.addView("clientServicesList", new ServicesListClient());
+
+        //Client my repairs
+        navigator.addView("clientMyRepairs", new MyRepairs());
+
+        //Client my cars
+        navigator.addView("clientMyCars", new MyCars());
+
+        //Client my data
+        navigator.addView("clientMyData", new MyData());
+
+        /*
+        EMPLOYEE VIEWS
+         */
+
+        //Employee management client
+        navigator.addView("clientManagementEmployee", new ClientManagement());
+
+        //Employee management institution
+        navigator.addView("institutionManagementEmployee", new InstitutionManagement());
+
+        //Employee management cars
+        navigator.addView("carsManagementEmployee", new CarsManagement());
+
+        //Employee management employee
+        navigator.addView("employeeManagementEmployee", new EmployeeManagement());
+
+        //Employee management services
+        navigator.addView("servicesManagementEmployee", new ServicesManagement());
+
+        //Employee management repairs
+        navigator.addView("repairsManagementEmployee", new RepairsManagement());
 
         //Begin login view
         if (navigator.getState().isEmpty()) {

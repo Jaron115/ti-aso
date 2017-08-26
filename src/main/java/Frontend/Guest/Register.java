@@ -1,6 +1,8 @@
 package Frontend.Guest;
 
 import Backend.MainSystem;
+import Frontend.Menu.ClientMenuPanel;
+import Frontend.Menu.EmployeeMenuPanel;
 import Frontend.Menu.MainMenu;
 import Frontend.MyUI;
 import com.vaadin.navigator.Navigator;
@@ -10,6 +12,7 @@ import com.vaadin.ui.*;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  * Created by Jaron on 25.08.2017.
@@ -111,18 +114,31 @@ public class Register extends VerticalLayout implements View {
         VerticalLayout menuLayout = mainMenu.MainMenuLayout();
         Panel mainMenuPanel = new Panel("Menu główne", menuLayout);
         mainMenuPanel.setWidth("100%");
+        mainMenuPanel.setStyleName("mainMenuPanel");
 
-        //Panel - test
-        Panel test2Panel = new Panel("hgesdgsdggeg");
-        test2Panel.setWidth("100%");
+        //Panel - client menu
+        ClientMenuPanel clientMenu = new ClientMenuPanel();
+        VerticalLayout menuLayoutClient = clientMenu.ClientMenuLayout();
+        Panel clientMenuPanel = new Panel("Panel klienta", menuLayoutClient);
+        clientMenuPanel.setWidth("100%");
+        clientMenuPanel.setStyleName("clientMenuPanel");
 
+        //Panel - employee menu
+        EmployeeMenuPanel employeeMenu = new EmployeeMenuPanel();
+        VerticalLayout menuLayoutEmployee = employeeMenu.EmployeenMenuLayout();
+        Panel employeeMenuPanel = new Panel("Panel pracownika", menuLayoutEmployee);
+        clientMenuPanel.setWidth("100%");
+        clientMenuPanel.setStyleName("employeeMenuPanel");
 
 
         grid.addComponent(mainMenuPanel);
         grid.addComponent(registerPanel);
 
-        if(MainSystem.getUserID() != 0){
-            grid.addComponent(test2Panel);
+        if(Objects.equals(MainSystem.getUserType(), "client")){
+            grid.addComponent(clientMenuPanel);
+        }
+        else if(Objects.equals(MainSystem.getUserType(), "employee")){
+            grid.addComponent(employeeMenuPanel);
         }
 
         grid.setSpacing(true);

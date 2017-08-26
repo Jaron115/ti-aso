@@ -1,12 +1,25 @@
 package Frontend.Guest;
 
+import Backend.MainSystem;
+import Frontend.Menu.ClientMenuPanel;
+import Frontend.Menu.EmployeeMenuPanel;
+import Frontend.Menu.MainMenu;
 import com.vaadin.navigator.View;
+import com.vaadin.server.Page;
 import com.vaadin.ui.*;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  * Created by Jaron on 25.08.2017.
  */
 public class EmployeeLogin extends VerticalLayout implements View {
+
+    private MainSystem mainSystem = new MainSystem();
+
     TextField employeeLogin;
     PasswordField employeePassword;
     Button employeeButtonLogIn;
@@ -61,19 +74,38 @@ public class EmployeeLogin extends VerticalLayout implements View {
         loginPanel.setWidth("100%");
         loginPanel.setStyleName("employeePanel");
 
-        //Panel - test
-        Panel testPanel = new Panel("hgegeg");
-        testPanel.setWidth("100%");
+        //Panel - guest menu
+        MainMenu mainMenu = new MainMenu();
+        VerticalLayout menuLayout = mainMenu.MainMenuLayout();
+        Panel mainMenuPanel = new Panel("Menu główne", menuLayout);
+        mainMenuPanel.setWidth("100%");
+        mainMenuPanel.setStyleName("mainMenuPanel");
 
-        //Panel - test
-        Panel test2Panel = new Panel("hgesdgsdggeg");
-        test2Panel.setWidth("100%");
+        //Panel - client menu
+        ClientMenuPanel clientMenu = new ClientMenuPanel();
+        VerticalLayout menuLayoutClient = clientMenu.ClientMenuLayout();
+        Panel clientMenuPanel = new Panel("Panel klienta", menuLayoutClient);
+        clientMenuPanel.setWidth("100%");
+        clientMenuPanel.setStyleName("clientMenuPanel");
+
+        //Panel - employee menu
+        EmployeeMenuPanel employeeMenu = new EmployeeMenuPanel();
+        VerticalLayout menuLayoutEmployee = employeeMenu.EmployeenMenuLayout();
+        Panel employeeMenuPanel = new Panel("Panel pracownika", menuLayoutEmployee);
+        clientMenuPanel.setWidth("100%");
+        clientMenuPanel.setStyleName("employeeMenuPanel");
 
 
-
-        grid.addComponent(testPanel);
+        grid.addComponent(mainMenuPanel);
         grid.addComponent(loginPanel);
-        grid.addComponent(test2Panel);
+
+        if(Objects.equals(MainSystem.getUserType(), "client")){
+            grid.addComponent(clientMenuPanel);
+        }
+        else if(Objects.equals(MainSystem.getUserType(), "employee")){
+            grid.addComponent(employeeMenuPanel);
+        }
+
         grid.setSpacing(true);
         grid.setMargin(true);
 
@@ -82,5 +114,24 @@ public class EmployeeLogin extends VerticalLayout implements View {
         setComponentAlignment(grid, Alignment.TOP_LEFT);
         setHeight("100%");
         setWidth("100%");
+
+        employeeButtonLogIn.addClickListener(clickEvent -> {
+            boolean loginStatus = false;
+
+            try {
+                loginStatus = mainSystem.employeeLogin(employeeLogin.getValue(), mainSystem.md5Password(employeeLogin.getValue()));
+            } catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            if(loginStatus){
+                Notification.show("Zalogowano");
+
+                Page.getCurrent().reload();
+
+            } else{
+                Notification.show("Nieprawidłowe dane");
+            }
+        });
     }
 }

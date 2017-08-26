@@ -19,7 +19,7 @@ public class MainMenu extends VerticalLayout implements View{
         Button homepage = new Button("Strona główna");
 
         homepage.addClickListener((Button.ClickListener) clickEvent -> {
-            UI.getCurrent().getNavigator().navigateTo("clientLogin");
+            UI.getCurrent().getNavigator().navigateTo("index");
         });
 
         menuLayout.addComponent(homepage);
