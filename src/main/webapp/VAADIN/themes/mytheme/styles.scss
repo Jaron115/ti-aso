@@ -9,11 +9,22 @@
   @include addons;
   @include mytheme;
 
+
+
   font-family: "Lato", sans-serif;
 
   //START CLEANING BAD STYLES
+  *{
+    outline: none;
+  }
+
   .v-verticallayout{
     padding: 0!important;
+  }
+
+  .v-Notification, .popupContent {
+    font-family: "Lato", sans-serif;
+    color: #333333;
   }
 
   .v-formlayout-captioncell, .v-formlayout-errorcell{
@@ -72,6 +83,12 @@
       &:hover {
         color: #ffffff;
         background: #333333;
+      }
+
+      &:focus{
+        &:after{
+          border: none;
+        }
       }
     }
   }

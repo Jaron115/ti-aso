@@ -14771,8 +14771,17 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.mytheme * {
+	outline: none;
+}
+
 .mytheme .v-verticallayout {
 	padding: 0 !important;
+}
+
+.mytheme .v-Notification, .mytheme .popupContent {
+	font-family: "Lato", sans-serif;
+	color: #333333;
 }
 
 .mytheme .v-formlayout-captioncell, .mytheme .v-formlayout-errorcell {
@@ -14831,4 +14840,8 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .clientPanel .v-button:hover, .mytheme .employeePanel .v-button:hover, .mytheme .registerPanel .v-button:hover {
 	color: #ffffff;
 	background: #333333;
+}
+
+.mytheme .clientPanel .v-button:focus:after, .mytheme .employeePanel .v-button:focus:after, .mytheme .registerPanel .v-button:focus:after {
+	border: none;
 }

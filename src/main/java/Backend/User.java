@@ -11,59 +11,69 @@ import java.util.Date;
 //superclass fo teacher, student
 public class User {
 
-    protected String zID;
+    protected String id;
     protected String name;
+    protected String lastName;
+    protected String address;
+    protected String login;
     protected String password;
-    protected Date DOB;
-    protected String gender;
 
-    public User(String zID, String name, String password, Date DOB, String gender) {
-        this.zID = zID;
+    public User(String id, String name, String lastName, String address, String login, String password) {
+        this.id = id;
         this.name = name;
+        this.lastName = lastName;
+        this.address = address;
+        this.login = login;
         this.password = password;
-        this.DOB = DOB;
-        this.gender = gender;
     }
 
-    public String getID() {
-        return this.zID;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
-        return this.name;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
-    public Date getDOB() {
-        return this.DOB;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getGender() {
-        return this.gender;
-    }
 
-    public String getType() {
-        return "";
-    }
-
-    //can only be called by Teacher
-    public ArrayList<Class> getClasses() {
-        return new ArrayList<>();
-    }
-
-    public void addClass(Class class1) {
-        //leave blank
-    }
-
-    public void addClassToTeacher(String classID, String name) {
-        //leave blank
-    }
-
-    @Override
-    public String toString() {
-        return this.zID + ": " + this.name;
-    }
 }

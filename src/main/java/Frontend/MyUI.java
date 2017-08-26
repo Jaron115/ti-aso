@@ -2,6 +2,7 @@ package Frontend;
 
 import javax.servlet.annotation.WebServlet;
 
+import Backend.MainSystem;
 import Frontend.Guest.*;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Theme;
@@ -10,7 +11,9 @@ import com.vaadin.annotations.Widgetset;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -40,13 +43,16 @@ public class MyUI extends UI {
         //Client register
         navigator.addView("clientRegister", new Register());
 
-        //Guest Sevice List
+        //Guest service list
         navigator.addView("guestServicesList", new ServicesList());
 
         //Begin login view
-        navigator.navigateTo("clientRegister");
+        if (navigator.getState().isEmpty()) {
+            navigator.navigateTo("clientRegister");
+        }
     }
- 
+
+
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {

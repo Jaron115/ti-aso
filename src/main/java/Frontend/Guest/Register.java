@@ -1,9 +1,14 @@
 package Frontend.Guest;
 
 import Backend.MainSystem;
+import Frontend.Menu.MainMenu;
+import Frontend.MyUI;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.*;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 /**
@@ -11,15 +16,15 @@ import java.sql.SQLException;
  */
 public class Register extends VerticalLayout implements View {
 
-    MainSystem mainSystem = new MainSystem();
+    private MainSystem mainSystem = new MainSystem();
 
-    TextField clientName;
-    TextField clientAdress;
-    TextField clientSurname;
-    TextField clientLogin;
-    TextField clientEmail;
-    PasswordField clientPassword;
-    Button clientButtonRegister;
+    private TextField clientName;
+    private TextField clientSurname;
+    private TextField clientAdress;
+    private TextField clientEmail;
+    private TextField clientLogin;
+    private PasswordField clientPassword;
+    private Button clientButtonRegister;
 
     public Register() {
 
@@ -32,10 +37,10 @@ public class Register extends VerticalLayout implements View {
 
         //UI Elements
         clientName = new TextField();
-        clientAdress = new TextField();
         clientSurname = new TextField();
-        clientLogin = new TextField();
+        clientAdress = new TextField();
         clientEmail = new TextField();
+        clientLogin = new TextField();
         clientPassword = new PasswordField();
 
         //UI Elements - Button
@@ -43,18 +48,18 @@ public class Register extends VerticalLayout implements View {
 
         //Add Placeholders
         clientName.setPlaceholder("Podaj imię...");
-        clientAdress.setPlaceholder("Podaj adres...");
         clientSurname.setPlaceholder("Podaj nazwisko...");
-        clientLogin.setPlaceholder("Podaj login...");
+        clientAdress.setPlaceholder("Podaj adres...");
         clientEmail.setPlaceholder("Podaj email...");
+        clientLogin.setPlaceholder("Podaj login...");
         clientPassword.setPlaceholder("Podaj hasło...");
 
         //Styles
         clientName.setWidth("100%");
-        clientAdress.setWidth("100%");
         clientSurname.setWidth("100%");
-        clientLogin.setWidth("100%");
+        clientAdress.setWidth("100%");
         clientEmail.setWidth("100%");
+        clientLogin.setWidth("100%");
         clientPassword.setWidth("100%");
 
         //Add Horizontal layout - inputs
@@ -63,22 +68,22 @@ public class Register extends VerticalLayout implements View {
         HorizontalLayout HLayoutInputsRow1 = new HorizontalLayout();
 
         HLayoutInputsRow1.addComponent(clientName);
-        HLayoutInputsRow1.addComponent(clientAdress);
+        HLayoutInputsRow1.addComponent(clientSurname);
 
         HLayoutInputsRow1.setWidth("100%");
 
         //Row 2
         HorizontalLayout HLayoutInputsRow2 = new HorizontalLayout();
 
-        HLayoutInputsRow2.addComponent(clientSurname);
-        HLayoutInputsRow2.addComponent(clientLogin);
+        HLayoutInputsRow2.addComponent(clientAdress);
+        HLayoutInputsRow2.addComponent(clientEmail);
 
         HLayoutInputsRow2.setWidth("100%");
 
         //Row 3
         HorizontalLayout HLayoutInputsRow3 = new HorizontalLayout();
 
-        HLayoutInputsRow3.addComponent(clientEmail);
+        HLayoutInputsRow3.addComponent(clientLogin);
         HLayoutInputsRow3.addComponent(clientPassword);
 
         HLayoutInputsRow3.setWidth("100%");
@@ -101,9 +106,11 @@ public class Register extends VerticalLayout implements View {
         registerPanel.setWidth("100%");
         registerPanel.setStyleName("registerPanel");
 
-        //Panel - test
-        Panel testPanel = new Panel("hgegeg");
-        testPanel.setWidth("100%");
+        //Panel - guest menu
+        MainMenu mainMenu = new MainMenu();
+        VerticalLayout menuLayout = mainMenu.MainMenuLayout();
+        Panel mainMenuPanel = new Panel("Menu główne", menuLayout);
+        mainMenuPanel.setWidth("100%");
 
         //Panel - test
         Panel test2Panel = new Panel("hgesdgsdggeg");
@@ -111,9 +118,13 @@ public class Register extends VerticalLayout implements View {
 
 
 
-        grid.addComponent(testPanel);
+        grid.addComponent(mainMenuPanel);
         grid.addComponent(registerPanel);
-        grid.addComponent(test2Panel);
+
+        if(MainSystem.getUserID() != 0){
+            grid.addComponent(test2Panel);
+        }
+
         grid.setSpacing(true);
         grid.setMargin(true);
 
@@ -125,12 +136,33 @@ public class Register extends VerticalLayout implements View {
 
         //Listeners
         clientButtonRegister.addClickListener((Button.ClickListener) clickEvent -> {
+
             try {
-                mainSystem.test();
-            } catch (SQLException e) {
+                if(!mainSystem.isAccountExist(clientLogin.getValue())){
+
+                    mainSystem.registerClient(
+                            clientName.getValue(),
+                            clientSurname.getValue(),
+                            clientAdress.getValue(),
+                            clientEmail.getValue(),
+                            clientLogin.getValue(),
+                            mainSystem.md5Password(clientPassword.getValue())
+                    );
+
+                    Notification.show("Zostałeś zarejestrowany");
+
+                    getUI().getNavigator().navigateTo("clientLogin");
+
+                } else{
+                    Notification.show("Takie konto już istnieje");
+                }
+
+            } catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException e) {
                 e.printStackTrace();
             }
         });
 
     }
+
+
 }

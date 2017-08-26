@@ -5,15 +5,24 @@
  */
 package Frontend.Guest;
 
+import Backend.MainSystem;
+import Frontend.Menu.MainMenu;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.Page;
 import com.vaadin.ui.*;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 /**
  *
  * @author jamesdgabb
  */
 public class ClientLogin extends VerticalLayout implements View {
+
+    private MainSystem mainSystem = new MainSystem();
 
     TextField clientLogin;
     PasswordField clientPassword;
@@ -69,9 +78,12 @@ public class ClientLogin extends VerticalLayout implements View {
         loginPanel.setWidth("100%");
         loginPanel.setStyleName("clientPanel");
 
-        //Panel - test
-        Panel testPanel = new Panel("hgegeg");
-        testPanel.setWidth("100%");
+        //Panel - guest menu
+        MainMenu mainMenu = new MainMenu();
+        VerticalLayout menuLayout = mainMenu.MainMenuLayout();
+        Panel mainMenuPanel = new Panel("Menu główne", menuLayout);
+        mainMenuPanel.setWidth("100%");
+        mainMenuPanel.setStyleName("mainMenuPanel");
 
         //Panel - test
         Panel test2Panel = new Panel("hgesdgsdggeg");
@@ -79,9 +91,13 @@ public class ClientLogin extends VerticalLayout implements View {
 
 
 
-        grid.addComponent(testPanel);
+        grid.addComponent(mainMenuPanel);
         grid.addComponent(loginPanel);
-        grid.addComponent(test2Panel);
+
+        if(MainSystem.getUserID() != 0){
+            grid.addComponent(test2Panel);
+        }
+
         grid.setSpacing(true);
         grid.setMargin(true);
 
@@ -90,7 +106,29 @@ public class ClientLogin extends VerticalLayout implements View {
         setComponentAlignment(grid, Alignment.TOP_LEFT);
         setHeight("100%");
         setWidth("100%");
+
+        //Listeners
+        clientButtonLogIn.addClickListener(clickEvent -> {
+            boolean loginStatus = false;
+
+            try {
+                loginStatus = mainSystem.clientLogin(clientLogin.getValue(), mainSystem.md5Password(clientPassword.getValue()));
+            } catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            if(loginStatus){
+                Notification.show("Zalogowano");
+
+                Page.getCurrent().reload();
+
+            } else{
+                Notification.show("Nieprawidłowe dane");
+            }
+        });
     }
+
+
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {

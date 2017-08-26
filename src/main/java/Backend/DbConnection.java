@@ -24,7 +24,7 @@ public class DbConnection
         }
     }
 
-    public void Select(String select, String from, String where) throws SQLException
+    public ResultSet Select(String select, String from, String where) throws SQLException
     {
         Initialize();
 
@@ -37,15 +37,13 @@ public class DbConnection
 
 
         cm = "SELECT " + select + " FROM " + from + " WHERE " + where;
-        //statement.execute(cm);
-        ResultSet rs = statement.executeQuery(cm);
 
-        while(rs.next())
-        {
-            String user = rs.getString("ID");
-            System.out.println("ID usera : " + user + "\n");
-        }
 
+        return statement.executeQuery(cm);
+
+    }
+
+    public void closeConnection() throws SQLException {
         connection.close();
     }
 
