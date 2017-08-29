@@ -27,9 +27,9 @@ public class ClientLogin extends VerticalLayout implements View {
 
     private MainSystem mainSystem = new MainSystem();
 
-    TextField clientLogin;
-    PasswordField clientPassword;
-    Button clientButtonLogIn;
+    private TextField clientLogin;
+    private PasswordField clientPassword;
+    private Button clientButtonLogIn;
 
     public ClientLogin(){
 

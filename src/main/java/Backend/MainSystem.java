@@ -6,17 +6,13 @@
 package Backend;
 
 
-import javax.management.Notification;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.sql.SQLException;
-
+import java.util.List;
 
 
 public class MainSystem {
@@ -50,11 +46,11 @@ public class MainSystem {
         return userType;
     }
 
-    public static void setUserID(int userID) {
+    private static void setUserID(int userID) {
         MainSystem.userID = userID;
     }
 
-    public static void setUserType(String userType) {
+    private static void setUserType(String userType) {
         MainSystem.userType = userType;
     }
 
@@ -174,6 +170,56 @@ public class MainSystem {
         }
 
         return result.toString();
+    }
+
+    /*
+    GET DATA SERVICES FROM DATABASE
+     */
+
+    public List<Service> getServiceDataFromDatabase() throws SQLException {
+        DbConnection db = new DbConnection();
+        List<Service> serviceList = new ArrayList<>();
+        ResultSet rs = db.Select("*", "Usluga", "");
+
+        while(rs.next()){
+            serviceList.add(
+                    new Service(
+                            rs.getInt("id"),
+                            rs.getString("nazwa"),
+                            rs.getString("opis"),
+                            rs.getString("cena")
+                    )
+            );
+        }
+
+        db.closeConnection();
+
+        return serviceList;
+    }
+
+      /*
+    GET DATA INSTITUTION FROM DATABASE
+     */
+
+    public List<Institution> getInstitutionDataFromDatabase() throws SQLException {
+        DbConnection db = new DbConnection();
+        List<Institution> institutionList = new ArrayList<>();
+        ResultSet rs = db.Select("*", "Placowka", "");
+
+        while(rs.next()){
+            institutionList.add(
+                    new Institution(
+                            rs.getInt("id"),
+                            rs.getString("nazwa"),
+                            rs.getString("opis"),
+                            rs.getString("adres")
+                    )
+            );
+        }
+
+        db.closeConnection();
+
+        return institutionList;
     }
 
 

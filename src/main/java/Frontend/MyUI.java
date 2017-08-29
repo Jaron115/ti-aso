@@ -59,9 +59,6 @@ public class MyUI extends UI {
         //Client institution list
         navigator.addView("clientInstitutionList", new InstitutionList());
 
-        //Client service list
-        navigator.addView("clientServicesList", new ServicesListClient());
-
         //Client my repairs
         navigator.addView("clientMyRepairs", new MyRepairs());
 

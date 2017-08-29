@@ -22,7 +22,7 @@ public class ClientMenuPanel extends VerticalLayout implements View {
         Button institution = new Button("Lista placówek");
 
         institution.addClickListener((Button.ClickListener) clickEvent -> {
-            UI.getCurrent().getNavigator().navigateTo("clientLogin");
+            UI.getCurrent().getNavigator().navigateTo("clientInstitutionList");
         });
 
         menuLayout.addComponent(institution);
@@ -31,7 +31,7 @@ public class ClientMenuPanel extends VerticalLayout implements View {
         Button serviceList = new Button("Lista usług");
 
         serviceList.addClickListener((Button.ClickListener) clickEvent -> {
-            UI.getCurrent().getNavigator().navigateTo("clientServicesList");
+            UI.getCurrent().getNavigator().navigateTo("guestServicesList");
         });
 
         menuLayout.addComponent(serviceList);

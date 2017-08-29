@@ -47,8 +47,7 @@ public class DbConnection
         connection.close();
     }
 
-    public void Insert(String into, String column, String value)
-    {
+    public void Insert(String into, String column, String value) {
         try {
             Initialize();
 
@@ -64,10 +63,9 @@ public class DbConnection
         }
     }
 
-    public void Update(String update, String set, String where)
-    {
-        try
-        {
+    public void Update(String update, String set, String where) {
+
+        try {
             Initialize();
             cm = "UPDATE " + update + " SET " + set + " WHERE " + where;
 
@@ -75,23 +73,18 @@ public class DbConnection
 
             connection.close();
         }
-        catch(SQLException ex)
-        {
+        catch(SQLException ex) {
             System.out.println("Error : " + ex);
         }
     }
 
-    public void Delete(String from, String where, String delete)
-    {
-        try
-        {
+    public void Delete(String from, String where, String delete) {
+        try {
             Initialize();
             cm = "DELETE " + delete + " FROM " + from + " WHERE " + where;
 
             statement.executeUpdate(cm);
-        }
-        catch(SQLException ex)
-        {
+        } catch(SQLException ex) {
             System.out.println("Error : " + ex);
         }
     }

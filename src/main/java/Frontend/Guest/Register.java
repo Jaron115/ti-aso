@@ -156,29 +156,35 @@ public class Register extends VerticalLayout implements View {
         //Listeners
         clientButtonRegister.addClickListener((Button.ClickListener) clickEvent -> {
 
-            try {
-                if(!mainSystem.isAccountExist(clientLogin.getValue())){
+            if(!clientName.isEmpty() && !clientSurname.isEmpty() && !clientAdress.isEmpty() && !clientEmail.isEmpty() && !clientLogin.isEmpty() && !clientPassword.isEmpty()){
+                try {
+                    if(!mainSystem.isAccountExist(clientLogin.getValue())){
 
-                    mainSystem.registerClient(
-                            clientName.getValue(),
-                            clientSurname.getValue(),
-                            clientAdress.getValue(),
-                            clientEmail.getValue(),
-                            clientLogin.getValue(),
-                            mainSystem.md5Password(clientPassword.getValue())
-                    );
+                        mainSystem.registerClient(
+                                clientName.getValue(),
+                                clientSurname.getValue(),
+                                clientAdress.getValue(),
+                                clientEmail.getValue(),
+                                clientLogin.getValue(),
+                                mainSystem.md5Password(clientPassword.getValue())
+                        );
 
-                    Notification.show("Zostałeś zarejestrowany");
+                        Notification.show("Zostałeś zarejestrowany");
 
-                    getUI().getNavigator().navigateTo("clientLogin");
+                        getUI().getNavigator().navigateTo("clientLogin");
 
-                } else{
-                    Notification.show("Takie konto już istnieje");
+                    } else{
+                        Notification.show("Takie konto już istnieje");
+                    }
+
+                } catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException e) {
+                    e.printStackTrace();
                 }
-
-            } catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException e) {
-                e.printStackTrace();
+            } else{
+                Notification.show("Pola nie mogą zostać puste");
             }
+
+
         });
 
     }

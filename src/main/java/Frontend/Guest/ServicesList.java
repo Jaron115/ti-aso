@@ -1,12 +1,15 @@
 package Frontend.Guest;
 
 import Backend.MainSystem;
+import Backend.Service;
 import Frontend.Menu.ClientMenuPanel;
 import Frontend.Menu.EmployeeMenuPanel;
 import Frontend.Menu.MainMenu;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.*;
 
+
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -16,9 +19,7 @@ import java.util.Objects;
  */
 public class ServicesList extends VerticalLayout implements View {
 
-//    List<ServicesList> serviceList = Arrays.asList(
-//
-//    );
+    private MainSystem mainSystem = new MainSystem();
 
     public ServicesList(){
 
@@ -29,9 +30,35 @@ public class ServicesList extends VerticalLayout implements View {
         grid.setColumnExpandRatio(1,3);
         grid.setColumnExpandRatio(2,1);
 
+
+        //Table - service data
+        List<Service> serviceData = null;
+        Grid<Service> serviceDataGrid;
+        try {
+            serviceData = mainSystem.getServiceDataFromDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        serviceDataGrid = new Grid<>();
+
+        serviceDataGrid.setSizeFull();
+        serviceDataGrid.addStyleName("dataTable");
+        serviceDataGrid.setHeight("100%");
+
+        serviceDataGrid.addColumn(Service::getName).setCaption("Nazwa").setResizable(false);
+        serviceDataGrid.addColumn(Service::getDescription).setCaption("Opis").setResizable(false);
+        serviceDataGrid.addColumn(Service::getPrice).setCaption("Cena").setResizable(false);
+
+        assert serviceData != null;
+        serviceDataGrid.setItems(serviceData);
+
+
+
         //Panel - service list
-        Panel loginPanel = new Panel("Lista usług");
-        loginPanel.setWidth("100%");
+        Panel serviceListPanel = new Panel("Lista usług", serviceDataGrid);
+        serviceListPanel.setWidth("100%");
+        serviceListPanel.setStyleName("dataListHolder");
 
         //Panel - guest menu
         MainMenu mainMenu = new MainMenu();
@@ -59,7 +86,7 @@ public class ServicesList extends VerticalLayout implements View {
 
 
         grid.addComponent(mainMenuPanel);
-        grid.addComponent(loginPanel);
+        grid.addComponent(serviceListPanel);
 
         if(Objects.equals(MainSystem.getUserType(), "client")){
             grid.addComponent(clientMenuPanel);

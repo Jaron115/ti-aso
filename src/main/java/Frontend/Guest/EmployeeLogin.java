@@ -20,9 +20,9 @@ public class EmployeeLogin extends VerticalLayout implements View {
 
     private MainSystem mainSystem = new MainSystem();
 
-    TextField employeeLogin;
-    PasswordField employeePassword;
-    Button employeeButtonLogIn;
+    private TextField employeeLogin;
+    private PasswordField employeePassword;
+    private Button employeeButtonLogIn;
 
     public EmployeeLogin(){
 
@@ -64,7 +64,6 @@ public class EmployeeLogin extends VerticalLayout implements View {
         HLayoutButton.setWidth("100%");
         HLayoutButton.setHeight("100%");
         HLayoutButton.setComponentAlignment(employeeButtonLogIn, Alignment.MIDDLE_CENTER);
-
 
         //Form Layout
         FormLayout formLayout = new FormLayout(HLayoutInputs, HLayoutButton);
