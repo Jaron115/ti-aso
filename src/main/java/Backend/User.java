@@ -11,14 +11,14 @@ import java.util.Date;
 //superclass fo teacher, student
 public class User {
 
-    protected String id;
+    protected int id;
     protected String name;
     protected String lastName;
     protected String address;
     protected String login;
     protected String password;
 
-    public User(String id, String name, String lastName, String address, String login, String password) {
+    public User(int id, String name, String lastName, String address, String login, String password) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -27,11 +27,11 @@ public class User {
         this.password = password;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

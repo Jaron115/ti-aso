@@ -5,7 +5,7 @@ public class Employee extends User{
     protected String position;
     protected String salary;
 
-    public Employee(String id, String name, String lastName, String address, String login, String password, String position, String salary) {
+    public Employee(int id, String name, String lastName, String address, String login, String password, String position, String salary) {
         super(id, name, lastName, address, login, password);
         this.position = position;
         this.salary = salary;

@@ -1632,7 +1632,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme {
-	font-family: "Lato", sans-serif;
+	font-family: "Lato", sans-serif !important;
 }
 
 .mytheme.v-app, .mytheme.v-app-loading {
@@ -15001,10 +15001,98 @@ div.v-layout.v-horizontal.v-widget {
 	border-right: 1px solid #d8d8d8;
 }
 
-.mytheme .dataListHolder .v-grid-tablewrapper table tbody tr td:first-child {
-	text-align: left;
-}
-
 .mytheme .dataListHolder .v-grid-tablewrapper table tbody tr td:last-child {
 	border-right: 0;
+}
+
+.mytheme .dataListHolder .v-textfield {
+	border: 1px solid #d8d8d8;
+	padding: 15px 10px;
+	border-radius: 8px;
+	height: auto;
+}
+
+.mytheme .dataListHolder .v-textfield:focus {
+	border: 1px solid #d8d8d8;
+	box-shadow: none;
+}
+
+.mytheme .dataListHolder .v-button {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	max-width: 300px;
+	border: 1px solid #d8d8d8;
+	padding: 15px 10px;
+	background: transparent;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	border-radius: 8px;
+	height: auto;
+	box-shadow: none;
+}
+
+.mytheme .dataListHolder .v-button:hover {
+	color: #ffffff;
+	background: #333333;
+}
+
+.mytheme .dataListHolder .v-button:focus:after {
+	border: #d8d8d8;
+	box-shadow: none;
+}
+
+.mytheme .tabsHeader .v-tabsheet-tabcontainer:before {
+	content: none;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs {
+	display: block;
+	border-radius: 8px 8px 0 0;
+	border-bottom: 0;
+	margin-bottom: 20px;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs tbody {
+	width: 100%;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs tr {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs td {
+	width: 100%;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs td.v-tabsheet-tabitemcell-selected .v-caption {
+	background: #333333;
+	color: #ffffff;
+	border-color: #d8d8d8;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs td:first-of-type .v-caption {
+	border-radius: 8px 0 0 8px;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs td:nth-last-child(2) .v-caption {
+	border-radius: 0 8px 8px 0;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs td + td .v-caption {
+	border-left: 0;
+}
+
+.mytheme .tabsHeader table.v-tabsheet-tabs td .v-caption {
+	display: block;
+	text-align: center;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	border-radius: 0;
+	border: 1px solid #d8d8d8;
+	margin: 0;
+	color: #333333;
+	padding: 10px 15px;
 }

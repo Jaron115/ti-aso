@@ -103,6 +103,9 @@ public class InstitutionList extends VerticalLayout implements View {
         setHeight("100%");
         setWidth("100%");
 
+        if(MainSystem.getUserID() == 0 || !MainSystem.getUserType().equals("client")){
+            UI.getCurrent().getNavigator().navigateTo("clientLogin");
+        }
     }
 
 }

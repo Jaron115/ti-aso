@@ -183,8 +183,6 @@ public class Register extends VerticalLayout implements View {
             } else{
                 Notification.show("Pola nie mogą zostać puste");
             }
-
-
         });
 
     }

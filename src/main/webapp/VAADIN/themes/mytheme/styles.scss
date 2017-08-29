@@ -9,9 +9,7 @@
   @include addons;
   @include mytheme;
 
-
-
-  font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif !important;
 
   //START CLEANING BAD STYLES
   *{
@@ -266,10 +264,6 @@
               height: 31px!important;
               border-right: 1px solid #d8d8d8;
 
-              &:first-child {
-                text-align: left;
-              }
-
               &:last-child {
                 border-right: 0;
               }
@@ -278,6 +272,119 @@
         }
       }
     }
+
+    .v-textfield{
+      border: 1px solid #d8d8d8;
+      padding: 15px 10px;
+      border-radius: 8px;
+      height: auto;
+
+      &:focus{
+        border: 1px solid #d8d8d8;
+        box-shadow: none;
+      }
+    }
+
+    .v-button{
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+      max-width: 300px;
+      border: 1px solid #d8d8d8;
+      padding: 15px 10px;
+      background: transparent;
+      -webkit-transition: all .5s;
+      transition: all .5s;
+      border-radius: 8px;
+      height: auto;
+      box-shadow: none;
+
+      &:hover {
+        color: #ffffff;
+        background: #333333;
+      }
+
+      &:focus{
+        &:after{
+          border: #d8d8d8;
+          box-shadow: none;
+        }
+      }
+    }
   }
   //END DATA LIST HOLDER
+
+  //START TABS HEADER HOLDER
+  .tabsHeader{
+
+    .v-tabsheet-tabcontainer{
+      &:before{
+        content: none;
+      }
+    }
+
+    table.v-tabsheet-tabs{
+      display: block;
+      border-radius: 8px 8px 0 0;
+      border-bottom: 0;
+      margin-bottom: 20px;
+
+      tbody{
+        width: 100%;
+      }
+
+      tr{
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+      }
+
+      td{
+        width: 100%;
+
+        &.v-tabsheet-tabitemcell-selected{
+          .v-caption{
+            background: #333333;
+            color: #ffffff;
+            border-color: #d8d8d8;
+          }
+        }
+
+        &:first-of-type .v-caption {
+          border-radius: 8px 0 0 8px;
+        }
+
+        &:nth-last-child(2) .v-caption {
+          border-radius: 0 8px 8px 0;
+        }
+
+        & + td .v-caption {
+          border-left: 0;
+        }
+
+        .v-caption{
+          display: block;
+          text-align: center;
+          -webkit-transition: all .5s;
+          transition: all .5s;
+          border-radius: 0;
+          border: 1px solid #d8d8d8;
+          margin: 0;
+          color: #333333;
+          padding: 10px 15px;
+        }
+      }
+    }
+
+    .v-tabsheet-content{
+
+    }
+  }
+  //END TABS HEADER HOLDER
+
+  //START FORM HOLDER
+  .formHolder{
+
+  }
+  //END FORM HOLDER
 }

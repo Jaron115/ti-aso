@@ -222,5 +222,57 @@ public class MainSystem {
         return institutionList;
     }
 
+     /*
+    GET CLIENT CARS DATA FROM DATABASE
+     */
+
+    public List<Car> getCarDataFromDatabase() throws SQLException {
+        DbConnection db = new DbConnection();
+        List<Car> carList = new ArrayList<>();
+        ResultSet rs = db.Select("*", "Pojazd p INNER JOIN Klient k ON p.id_klienta = k.id", "id_klienta = '" + getUserID() + "'");
+
+        while(rs.next()){
+            carList.add(
+                    new Car(
+                            rs.getInt("p.id"),
+                            rs.getString("p.marka"),
+                            rs.getString("p.model"),
+                            rs.getString("p.rok_produkcji"),
+                            rs.getString("p.kolor"),
+                            new Client(
+                                    rs.getInt("k.id"),
+                                    rs.getString("k.imie"),
+                                    rs.getString("k.nazwisko"),
+                                    rs.getString("k.adres"),
+                                    rs.getString("k.email"),
+                                    rs.getString("k.login"),
+                                    rs.getString("k.haslo")
+                            )
+                    )
+            );
+        }
+
+        db.closeConnection();
+
+        return carList;
+    }
+
+    /*
+    ADD CAR TO CLIENT
+     */
+
+    public void clientCar(String brand, String model, String year, String color) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Insert(
+                "Pojazd",
+                "marka, model, rok_produkcji, kolor, id_klienta",
+                "'" + brand + "', '" + model + "', '" + year + "', '" + color + "', '" + getUserID() + "'"
+        );
+
+
+        db.closeConnection();
+    }
+
 
 }
