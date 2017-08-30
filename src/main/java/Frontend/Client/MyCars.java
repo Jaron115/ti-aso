@@ -32,18 +32,21 @@ public class MyCars extends VerticalLayout implements View{
         grid.setColumnExpandRatio(1,3);
         grid.setColumnExpandRatio(2,1);
 
-        //region --------------------START MY REPAIRS - TAB 1------------------------
-
-        //Table - my cars
         List<Car> carData = null;
-        Grid<Car> carDataGrid;
+
         try {
             carData = mainSystem.getCarDataFromDatabase();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        carDataGrid = new Grid<>();
+        assert carData != null;
+
+        //region --------------------START MY REPAIRS - TAB 1------------------------
+
+        //Table - my cars
+
+        Grid<Car> carDataGrid = new Grid<>();
 
         carDataGrid.setSizeFull();
         carDataGrid.addStyleName("dataTable");
@@ -54,7 +57,6 @@ public class MyCars extends VerticalLayout implements View{
         carDataGrid.addColumn(Car::getYear).setCaption("Rok produkcji").setResizable(false);
         carDataGrid.addColumn(Car::getColor).setCaption("Kolor").setResizable(false);
 
-        assert carData != null;
         carDataGrid.setItems(carData);
 
         //endregion --------------------END MY REPAIRS - TAB 1------------------------
@@ -142,7 +144,83 @@ public class MyCars extends VerticalLayout implements View{
 
         //endregion --------------------END MY REPAIRS - TAB 2------------------------
 
-        Button button2 = new Button();
+        //region --------------------START MY REPAIRS - TAB 3------------------------
+
+        //Update car - my cars
+
+        //ComboBox
+        ComboBox<Car> carComboBoxUpdate = new ComboBox<>("Wybierz samochód");
+
+        carComboBoxUpdate.setItemCaptionGenerator(Car::getBrand);
+
+        carComboBoxUpdate.setItems(carData);
+
+        //UI Elements
+        TextField carBrandUpdate = new TextField();
+        TextField carModelUpdate = new TextField();
+        TextField carYearUpdate = new TextField();
+        TextField carColorUpdate = new TextField();
+
+        //UI Elements - Button
+        Button carButtonUpdate = new Button("Aktualizuj samochód");
+
+        //Add Placeholders
+        carBrandUpdate.setPlaceholder("Marka...");
+        carModelUpdate.setPlaceholder("Model...");
+        carYearUpdate.setPlaceholder("Rok produkcji...");
+        carColorUpdate.setPlaceholder("Kolor...");
+
+        //Add Horizontal layout - inputs
+
+        //Row 1
+        HorizontalLayout HLayoutInputsRow1Update = new HorizontalLayout();
+
+        HLayoutInputsRow1Update.addComponent(carComboBoxUpdate);
+
+        HLayoutInputsRow1Update.setWidth("100%");
+
+        //Row 2
+        HorizontalLayout HLayoutInputsRow2Update = new HorizontalLayout();
+
+        HLayoutInputsRow2Update.addComponent(carBrandUpdate);
+        HLayoutInputsRow2Update.addComponent(carModelUpdate);
+
+        HLayoutInputsRow2Update.setWidth("100%");
+
+        //Row 3
+        HorizontalLayout HLayoutInputsRow3Update = new HorizontalLayout();
+
+        HLayoutInputsRow3Update.addComponent(carYearUpdate);
+        HLayoutInputsRow3Update.addComponent(carColorUpdate);
+
+        HLayoutInputsRow3Update.setWidth("100%");
+
+        //Add Horizontal layout - button
+        HorizontalLayout HLayoutButtonUpdate = new HorizontalLayout();
+
+        HLayoutButtonUpdate.addComponent(carButtonUpdate);
+
+        HLayoutButtonUpdate.setWidth("100%");
+        HLayoutButtonUpdate.setHeight("100%");
+        HLayoutButtonUpdate.setComponentAlignment(carButtonUpdate, Alignment.MIDDLE_CENTER);
+
+
+        //Form Layout
+        FormLayout formLayoutUpdate = new FormLayout(HLayoutInputsRow1Update, HLayoutInputsRow2Update, HLayoutInputsRow3Update, HLayoutButtonUpdate);
+
+        //Styles
+        carBrandUpdate.setWidth("100%");
+        carModelUpdate.setWidth("100%");
+        carYearUpdate.setWidth("100%");
+        carColorUpdate.setWidth("100%");
+
+        //Listeners
+        carButtonUpdate.addClickListener((Button.ClickListener) clickEvent -> {
+            System.out.println(carComboBoxUpdate.getValue().getId());
+        });
+
+        //endregion --------------------END MY REPAIRS - TAB 3------------------------
+
         Button button3 = new Button();
 
         //Tabs - my repairs view
@@ -153,7 +231,7 @@ public class MyCars extends VerticalLayout implements View{
 
         repairsTabs.addTab(carDataGrid).setCaption("Moje pojazdy");
         repairsTabs.addTab(formLayout).setCaption("Dodaj pojazd");
-        repairsTabs.addTab(button2).setCaption("Aktualizuj pojazd");
+        repairsTabs.addTab(formLayoutUpdate).setCaption("Aktualizuj pojazd");
         repairsTabs.addTab(button3).setCaption("Usuń pojazd");
 
         //Panel - my repairs
