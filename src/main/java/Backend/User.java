@@ -8,17 +8,17 @@ package Backend;
 import java.util.ArrayList;
 import java.util.Date;
 
-//superclass fo teacher, student
+
 public class User {
 
-    protected int id;
-    protected String name;
-    protected String lastName;
-    protected String address;
-    protected String login;
-    protected String password;
+    private int id;
+    private String name;
+    private String lastName;
+    private String address;
+    private String login;
+    private String password;
 
-    public User(int id, String name, String lastName, String address, String login, String password) {
+    User(int id, String name, String lastName, String address, String login, String password) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;

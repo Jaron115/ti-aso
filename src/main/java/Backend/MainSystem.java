@@ -294,6 +294,88 @@ public class MainSystem {
         db.closeConnection();
     }
 
+
+    /*
+    GET SINGLE CLIENT DATA
+     */
+
+    public Client getSingleClientData() throws SQLException {
+        DbConnection db = new DbConnection();
+        Client clientData = null;
+
+        ResultSet rs = db.Select("*", "Klient", "id = '" + getUserID() + "'");
+
+        while(rs.next()){
+            clientData = new Client(
+                rs.getInt("id"),
+                rs.getString("imie"),
+                rs.getString("nazwisko"),
+                rs.getString("adres"),
+                rs.getString("email"),
+                rs.getString("login"),
+                rs.getString("haslo")
+            );
+        }
+
+        return clientData;
+    }
+
+    /*
+    UPDATE CURRENT CLIENT DATA
+     */
+
+    public void updateCurrentClientData(String name, String lastName, String address, String email, String login, String password) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Update(
+                "Klient",
+                "imie = '" + name + "', nazwisko = '" + lastName + "', adres = '" + address + "', email = '" + email + "', login = '" + login + "', haslo = '" + password + "'",
+                "id = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
+    DELETE CURRENT CLIENT
+     */
+
+    public void deleteCurrentClientData() throws SQLException {
+        clientRepairDeleteByCurrentClient();
+
+        currentClientCarDelete();
+
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Klient",
+                "id = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+
+        setUserType("");
+        setUserID(0);
+    }
+
+
+     /*
+    DELETE CLIENT CAR
+     */
+
+    private void currentClientCarDelete() throws SQLException {
+
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Pojazd",
+                "id_klienta = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
+
+
     /*
     DELETE CLIENT REPAIR
      */
@@ -309,4 +391,15 @@ public class MainSystem {
         db.closeConnection();
     }
 
+
+    private void clientRepairDeleteByCurrentClient() throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Naprawa",
+                "id_klienta = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
 }
