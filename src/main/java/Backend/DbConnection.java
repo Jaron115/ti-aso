@@ -78,10 +78,10 @@ public class DbConnection
         }
     }
 
-    public void Delete(String from, String where, String delete) {
+    public void Delete(String from, String where) {
         try {
             Initialize();
-            cm = "DELETE " + delete + " FROM " + from + " WHERE " + where;
+            cm = "DELETE FROM " + from + " WHERE " + where;
 
             statement.executeUpdate(cm);
         } catch(SQLException ex) {

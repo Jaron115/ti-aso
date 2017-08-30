@@ -6,6 +6,7 @@ import Backend.MainSystem;
 import Frontend.Menu.ClientMenuPanel;
 import Frontend.Menu.EmployeeMenuPanel;
 import Frontend.Menu.MainMenu;
+import com.vaadin.data.HasValue;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
@@ -151,7 +152,8 @@ public class MyCars extends VerticalLayout implements View{
         //ComboBox
         ComboBox<Car> carComboBoxUpdate = new ComboBox<>("Wybierz samochód");
 
-        carComboBoxUpdate.setItemCaptionGenerator(Car::getBrand);
+        carComboBoxUpdate.setItemCaptionGenerator(Car::carData);
+        carComboBoxUpdate.setSizeFull();
 
         carComboBoxUpdate.setItems(carData);
 
@@ -166,9 +168,17 @@ public class MyCars extends VerticalLayout implements View{
 
         //Add Placeholders
         carBrandUpdate.setPlaceholder("Marka...");
+        carBrandUpdate.setPlaceholder("Marka...");
         carModelUpdate.setPlaceholder("Model...");
         carYearUpdate.setPlaceholder("Rok produkcji...");
         carColorUpdate.setPlaceholder("Kolor...");
+
+        //Add Caption
+        carBrandUpdate.setCaption("Marka");
+        carBrandUpdate.setCaption("Marka");
+        carModelUpdate.setCaption("Model");
+        carYearUpdate.setCaption("Rok produkcji");
+        carColorUpdate.setCaption("Kolor");
 
         //Add Horizontal layout - inputs
 
@@ -208,6 +218,7 @@ public class MyCars extends VerticalLayout implements View{
         //Form Layout
         FormLayout formLayoutUpdate = new FormLayout(HLayoutInputsRow1Update, HLayoutInputsRow2Update, HLayoutInputsRow3Update, HLayoutButtonUpdate);
 
+
         //Styles
         carBrandUpdate.setWidth("100%");
         carModelUpdate.setWidth("100%");
@@ -216,12 +227,95 @@ public class MyCars extends VerticalLayout implements View{
 
         //Listeners
         carButtonUpdate.addClickListener((Button.ClickListener) clickEvent -> {
-            System.out.println(carComboBoxUpdate.getValue().getId());
+            Car element = carComboBoxUpdate.getValue();
+
+            try {
+                if(!carBrandUpdate.isEmpty() && !carModelUpdate.isEmpty() && !carYearUpdate.isEmpty() && !carColorUpdate.isEmpty()){
+                    mainSystem.clientCarUpdate(
+                            element.getId(),
+                            carBrandUpdate.getValue(),
+                            carModelUpdate.getValue(),
+                            carYearUpdate.getValue(),
+                            carColorUpdate.getValue()
+                    );
+
+                    Notification.show("Samochód zaktualizowany");
+
+                    Page.getCurrent().reload();
+                } else{
+                    Notification.show("Uzupełnij wszystkie pola");
+                }
+            } catch (NullPointerException e){
+                Notification.show("Wybierz samochód");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+
+        carComboBoxUpdate.addValueChangeListener((HasValue.ValueChangeEvent<Car> event) -> {
+           Car element = carComboBoxUpdate.getValue();
+
+           carBrandUpdate.setValue(element.getBrand());
+           carModelUpdate.setValue(element.getModel());
+           carYearUpdate.setValue(element.getYear());
+           carColorUpdate.setValue(element.getColor());
+
         });
 
         //endregion --------------------END MY REPAIRS - TAB 3------------------------
 
-        Button button3 = new Button();
+        //region --------------------START MY REPAIRS - TAB 4------------------------
+
+        //Delete car - my cars
+
+        //ComboBox
+        ComboBox<Car> carComboBoxDelete = new ComboBox<>("Wybierz samochód");
+
+        carComboBoxDelete.setItemCaptionGenerator(Car::carData);
+        carComboBoxDelete.setSizeFull();
+
+        carComboBoxDelete.setItems(carData);
+
+        Button carButtonDelete = new Button("Usuń samochód");
+
+        //Row 1
+        HorizontalLayout HLayoutInputsRow1Delete = new HorizontalLayout();
+
+        HLayoutInputsRow1Delete.addComponent(carComboBoxDelete);
+
+        HLayoutInputsRow1Delete.setWidth("100%");
+
+        //Add Horizontal layout - button
+        HorizontalLayout HLayoutButtonDelete = new HorizontalLayout();
+
+        HLayoutButtonDelete.addComponent(carButtonDelete);
+
+        HLayoutButtonDelete.setWidth("100%");
+        HLayoutButtonDelete.setHeight("100%");
+        HLayoutButtonDelete.setComponentAlignment(carButtonDelete, Alignment.MIDDLE_CENTER);
+
+        //Form Layout
+        FormLayout formLayoutDelete = new FormLayout(HLayoutInputsRow1Delete, HLayoutButtonDelete);
+
+        carButtonDelete.addClickListener((Button.ClickListener) clickEvent -> {
+            Car element = carComboBoxDelete.getValue();
+
+            try {
+                mainSystem.clientCarDelete(
+                        element.getId()
+                );
+
+                Notification.show("Samochód usunięty");
+
+                Page.getCurrent().reload();
+            } catch (NullPointerException e){
+                Notification.show("Wybierz samochód");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+
+        //endregion --------------------END MY REPAIRS - TAB 4------------------------
 
         //Tabs - my repairs view
         TabSheet repairsTabs = new TabSheet();
@@ -232,7 +326,7 @@ public class MyCars extends VerticalLayout implements View{
         repairsTabs.addTab(carDataGrid).setCaption("Moje pojazdy");
         repairsTabs.addTab(formLayout).setCaption("Dodaj pojazd");
         repairsTabs.addTab(formLayoutUpdate).setCaption("Aktualizuj pojazd");
-        repairsTabs.addTab(button3).setCaption("Usuń pojazd");
+        repairsTabs.addTab(formLayoutDelete).setCaption("Usuń pojazd");
 
         //Panel - my repairs
         Panel institutionListPanel = new Panel("Moje pojazdy", repairsTabs);

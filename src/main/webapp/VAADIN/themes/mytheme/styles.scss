@@ -58,7 +58,11 @@
       }
     }
 
-    .v-textfield{
+    .v-filterselect{
+      height: auto;
+    }
+
+    .v-textfield, .v-filterselect-input{
       border: 1px solid #d8d8d8;
       padding: 15px 10px;
       border-radius: 8px;
@@ -273,7 +277,16 @@
       }
     }
 
-    .v-textfield{
+    .v-filterselect{
+      height: auto;
+    }
+
+    .v-caption{
+      padding: 0;
+      margin: 5px 0;
+    }
+
+    .v-textfield, .v-filterselect-input{
       border: 1px solid #d8d8d8;
       padding: 15px 10px;
       border-radius: 8px;
@@ -376,15 +389,6 @@
       }
     }
 
-    .v-tabsheet-content{
-
-    }
   }
   //END TABS HEADER HOLDER
-
-  //START FORM HOLDER
-  .formHolder{
-
-  }
-  //END FORM HOLDER
 }

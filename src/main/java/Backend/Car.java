@@ -65,4 +65,8 @@ public class Car {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    public String carData(){
+        return "Samochód: " + this.brand + " " + this.model + " Rok: " + this.year + " Kolor: " + this.color;
+    }
 }

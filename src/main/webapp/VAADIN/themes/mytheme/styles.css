@@ -14816,14 +14816,18 @@ div.v-layout.v-horizontal.v-widget {
 	font-weight: 900;
 }
 
-.mytheme .clientPanel .v-textfield, .mytheme .employeePanel .v-textfield, .mytheme .registerPanel .v-textfield {
+.mytheme .clientPanel .v-filterselect, .mytheme .employeePanel .v-filterselect, .mytheme .registerPanel .v-filterselect {
+	height: auto;
+}
+
+.mytheme .clientPanel .v-textfield, .mytheme .clientPanel .v-filterselect-input, .mytheme .employeePanel .v-textfield, .mytheme .employeePanel .v-filterselect-input, .mytheme .registerPanel .v-textfield, .mytheme .registerPanel .v-filterselect-input {
 	border: 1px solid #d8d8d8;
 	padding: 15px 10px;
 	border-radius: 8px;
 	height: auto;
 }
 
-.mytheme .clientPanel .v-textfield:focus, .mytheme .employeePanel .v-textfield:focus, .mytheme .registerPanel .v-textfield:focus {
+.mytheme .clientPanel .v-textfield:focus, .mytheme .clientPanel .v-filterselect-input:focus, .mytheme .employeePanel .v-textfield:focus, .mytheme .employeePanel .v-filterselect-input:focus, .mytheme .registerPanel .v-textfield:focus, .mytheme .registerPanel .v-filterselect-input:focus {
 	border: 1px solid #d8d8d8;
 	box-shadow: none;
 }
@@ -15005,14 +15009,23 @@ div.v-layout.v-horizontal.v-widget {
 	border-right: 0;
 }
 
-.mytheme .dataListHolder .v-textfield {
+.mytheme .dataListHolder .v-filterselect {
+	height: auto;
+}
+
+.mytheme .dataListHolder .v-caption {
+	padding: 0;
+	margin: 5px 0;
+}
+
+.mytheme .dataListHolder .v-textfield, .mytheme .dataListHolder .v-filterselect-input {
 	border: 1px solid #d8d8d8;
 	padding: 15px 10px;
 	border-radius: 8px;
 	height: auto;
 }
 
-.mytheme .dataListHolder .v-textfield:focus {
+.mytheme .dataListHolder .v-textfield:focus, .mytheme .dataListHolder .v-filterselect-input:focus {
 	border: 1px solid #d8d8d8;
 	box-shadow: none;
 }

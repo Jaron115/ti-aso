@@ -18,20 +18,6 @@ import java.util.List;
 public class MainSystem {
 
 
-    public void test() throws SQLException {
-        DbConnection db = new DbConnection();
-
-        ResultSet rs = db.Select("","Klient","");
-
-        while(rs.next()){
-            System.out.println(rs.getInt("id"));
-            System.out.println(rs.getString("imie"));
-        }
-
-        db.closeConnection();
-
-    }
-
     /*
     STATIC VARIABLE
      */
@@ -274,5 +260,53 @@ public class MainSystem {
         db.closeConnection();
     }
 
+    /*
+    UPDATE CLIENT CAR
+     */
+
+    public void clientCarUpdate(int id, String brand, String model, String year, String color) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Update(
+                "Pojazd",
+                "marka = '" + brand + "', model = '" + model + "', rok_produkcji = '" + year + "', kolor = '" + color + "'",
+                "id = '" + id + "' AND id_klienta = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
+    DELETE CLIENT CAR
+     */
+
+    public void clientCarDelete(int id) throws SQLException {
+
+        clientRepairDeleteByCar(id);
+
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Pojazd",
+                "id = '" + id + "' AND id_klienta = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
+    DELETE CLIENT REPAIR
+     */
+
+    private void clientRepairDeleteByCar(int carId) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Naprawa",
+                "id_pojazdu = '" + carId + "' AND id_klienta = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
 
 }
