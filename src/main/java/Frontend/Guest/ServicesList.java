@@ -81,8 +81,8 @@ public class ServicesList extends VerticalLayout implements View {
         VerticalLayout menuLayoutEmployee = employeeMenu.EmployeenMenuLayout();
         menuLayoutEmployee.setSpacing(false);
         Panel employeeMenuPanel = new Panel("Panel pracownika", menuLayoutEmployee);
-        clientMenuPanel.setWidth("100%");
-        clientMenuPanel.setStyleName("employeeMenuPanel");
+        employeeMenuPanel.setWidth("100%");
+        employeeMenuPanel.setStyleName("employeeMenuPanel");
 
 
         grid.addComponent(mainMenuPanel);

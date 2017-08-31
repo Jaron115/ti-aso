@@ -10,8 +10,10 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -261,6 +263,54 @@ public class MainSystem {
     }
 
     /*
+    ADD INSTITUTION
+     */
+
+    public void institutionAdd(String name, String address, String description) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Insert(
+                "Placowka",
+                "nazwa, opis, adres",
+                "'" + name + "', '" + address + "', '" + description + "'"
+        );
+
+
+        db.closeConnection();
+    }
+
+    /*
+    UPDATE INSTITUTION
+     */
+
+    public void institutionUpdate(int id, String name, String address, String description) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Update(
+                "Placowka",
+                "nazwa = '" + name + "', opis = '" + description + "', adres = '" + address + "'",
+                "id = '" + id + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
+    DELETE INSTITUTION
+     */
+
+    public void institutionDelete(int id) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Placowka",
+                "id = '" + id + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
     UPDATE CLIENT CAR
      */
 
@@ -317,8 +367,56 @@ public class MainSystem {
             );
         }
 
+        db.closeConnection();
+
         return clientData;
     }
+
+     /*
+    GET CLIENT DATA
+     */
+
+    public List<Client> getClientData() throws SQLException {
+        DbConnection db = new DbConnection();
+        List<Client> clientList = new ArrayList<>();
+
+        ResultSet rs = db.Select("*", "Klient", "");
+
+        while(rs.next()){
+
+            clientList.add( new Client(
+                    rs.getInt("id"),
+                    rs.getString("imie"),
+                    rs.getString("nazwisko"),
+                    rs.getString("adres"),
+                    rs.getString("email"),
+                    rs.getString("login"),
+                    rs.getString("haslo")
+            ));
+        }
+
+        db.closeConnection();
+
+        return clientList;
+    }
+
+    /*
+    DELETE CLIENT DATA
+     */
+    public void deleteClientData(int id) throws SQLException {
+        clientRepairDeleteByClientId(id);
+        clientCarDeleteByClientId(id);
+
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Klient",
+                "id = '" + id + "'"
+        );
+
+        db.closeConnection();
+    }
+
 
     /*
     UPDATE CURRENT CLIENT DATA
@@ -358,6 +456,163 @@ public class MainSystem {
         setUserID(0);
     }
 
+    /*
+    GET CURRENT CLIENT REPAIR DATA
+     */
+
+    public List<Repair> getRepairDataFromDatabase() throws SQLException {
+        DbConnection db = new DbConnection();
+        List<Repair> repairList = new ArrayList<>();
+        ResultSet rs = db.Select("*", "Naprawa n INNER JOIN Klient k ON n.id_klienta = k.id INNER JOIN Usluga u ON n.id_uslugi = u.id INNER JOIN Pojazd p ON n.id_pojazdu = p.id INNER JOIN Placowka pl ON n.id_placowki = pl.id", "n.id_klienta = '" + getUserID() + "'");
+
+        while(rs.next()){
+            repairList.add(
+                    new Repair(
+                            rs.getInt("n.id"),
+                            new Client(
+                                    rs.getInt("k.id"),
+                                    rs.getString("k.imie"),
+                                    rs.getString("k.nazwisko"),
+                                    rs.getString("k.adres"),
+                                    rs.getString("k.email"),
+                                    rs.getString("k.login"),
+                                    rs.getString("k.haslo")
+                                    ),
+                            new Service(
+                                    rs.getInt("u.id"),
+                                    rs.getString("u.nazwa"),
+                                    rs.getString("u.opis"),
+                                    rs.getString("u.cena")
+                            ),
+                            new Car(
+                                    rs.getInt("p.id"),
+                                    rs.getString("p.marka"),
+                                    rs.getString("p.model"),
+                                    rs.getString("p.rok_produkcji"),
+                                    rs.getString("p.kolor"),
+                                    new Client(
+                                            rs.getInt("k.id"),
+                                            rs.getString("k.imie"),
+                                            rs.getString("k.nazwisko"),
+                                            rs.getString("k.adres"),
+                                            rs.getString("k.email"),
+                                            rs.getString("k.login"),
+                                            rs.getString("k.haslo")
+                                    )
+                            ),
+                            new Institution(
+                                    rs.getInt("pl.id"),
+                                    rs.getString("pl.nazwa"),
+                                    rs.getString("pl.opis"),
+                                    rs.getString("pl.adres")
+                            ),
+                            rs.getString("n.data_naprawy"),
+                            rs.getString("n.status"),
+                            rs.getString("n.opis_naprawy")
+                    )
+            );
+        }
+
+        db.closeConnection();
+
+        return repairList;
+    }
+
+    /*
+    GET DELETABLE REPAIR DATA
+     */
+
+    public List<Repair> getDeletableRepairDataFromDatabase() throws SQLException {
+        DbConnection db = new DbConnection();
+        List<Repair> repairList = new ArrayList<>();
+        ResultSet rs = db.Select("*", "Naprawa n INNER JOIN Klient k ON n.id_klienta = k.id INNER JOIN Usluga u ON n.id_uslugi = u.id INNER JOIN Pojazd p ON n.id_pojazdu = p.id INNER JOIN Placowka pl ON n.id_placowki = pl.id", "n.id_klienta = '" + getUserID() + "' AND n.status = 'Oczekiwanie'");
+
+        while(rs.next()){
+            repairList.add(
+                    new Repair(
+                            rs.getInt("n.id"),
+                            new Client(
+                                    rs.getInt("k.id"),
+                                    rs.getString("k.imie"),
+                                    rs.getString("k.nazwisko"),
+                                    rs.getString("k.adres"),
+                                    rs.getString("k.email"),
+                                    rs.getString("k.login"),
+                                    rs.getString("k.haslo")
+                            ),
+                            new Service(
+                                    rs.getInt("u.id"),
+                                    rs.getString("u.nazwa"),
+                                    rs.getString("u.opis"),
+                                    rs.getString("u.cena")
+                            ),
+                            new Car(
+                                    rs.getInt("p.id"),
+                                    rs.getString("p.marka"),
+                                    rs.getString("p.model"),
+                                    rs.getString("p.rok_produkcji"),
+                                    rs.getString("p.kolor"),
+                                    new Client(
+                                            rs.getInt("k.id"),
+                                            rs.getString("k.imie"),
+                                            rs.getString("k.nazwisko"),
+                                            rs.getString("k.adres"),
+                                            rs.getString("k.email"),
+                                            rs.getString("k.login"),
+                                            rs.getString("k.haslo")
+                                    )
+                            ),
+                            new Institution(
+                                    rs.getInt("pl.id"),
+                                    rs.getString("pl.nazwa"),
+                                    rs.getString("pl.opis"),
+                                    rs.getString("pl.adres")
+                            ),
+                            rs.getString("n.data_naprawy"),
+                            rs.getString("n.status"),
+                            rs.getString("n.opis_naprawy")
+                    )
+            );
+        }
+
+        db.closeConnection();
+
+        return repairList;
+    }
+
+    /*
+    DELETE CLIENT REPAIR
+     */
+
+    public void clientRepairDelete(int id) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Naprawa",
+                "id = '" + id + "' AND id_klienta = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
+    ADD CLIENT REPAIR
+     */
+
+    public void clientRepair(int id_uslugi, int id_pojazdu, int id_placowki) throws SQLException {
+        String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+
+        DbConnection db = new DbConnection();
+
+        db.Insert(
+                "Naprawa",
+                "id_klienta, id_uslugi, id_pojazdu, id_placowki, data_naprawy, status, opis_naprawy",
+                "'" + getUserID() + "', '" + id_uslugi + "', '" + id_pojazdu + "', '" + id_placowki + "', '" + date + "', 'Oczekiwanie', ''"
+        );
+
+
+        db.closeConnection();
+    }
 
      /*
     DELETE CLIENT CAR
@@ -370,6 +625,17 @@ public class MainSystem {
         db.Delete(
                 "Pojazd",
                 "id_klienta = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    private void clientCarDeleteByClientId(int id) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Pojazd",
+                "id_klienta = '" + id + "'"
         );
 
         db.closeConnection();
@@ -398,6 +664,17 @@ public class MainSystem {
         db.Delete(
                 "Naprawa",
                 "id_klienta = '" + getUserID() + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    private void clientRepairDeleteByClientId(int id) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Naprawa",
+                "id_klienta = '" + id + "'"
         );
 
         db.closeConnection();

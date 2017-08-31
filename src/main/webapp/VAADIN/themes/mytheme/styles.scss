@@ -62,7 +62,7 @@
       height: auto;
     }
 
-    .v-textfield, .v-filterselect-input{
+    .v-textfield, .v-textarea, .v-filterselect-input{
       border: 1px solid #d8d8d8;
       padding: 15px 10px;
       border-radius: 8px;
@@ -286,7 +286,7 @@
       margin: 5px 0;
     }
 
-    .v-textfield, .v-filterselect-input{
+    .v-textfield, .v-textarea, .v-filterselect-input{
       border: 1px solid #d8d8d8;
       padding: 15px 10px;
       border-radius: 8px;

@@ -80,8 +80,8 @@ public class InstitutionList extends VerticalLayout implements View {
         VerticalLayout menuLayoutEmployee = employeeMenu.EmployeenMenuLayout();
         menuLayoutEmployee.setSpacing(false);
         Panel employeeMenuPanel = new Panel("Panel pracownika", menuLayoutEmployee);
-        clientMenuPanel.setWidth("100%");
-        clientMenuPanel.setStyleName("employeeMenuPanel");
+        employeeMenuPanel.setWidth("100%");
+        employeeMenuPanel.setStyleName("employeeMenuPanel");
 
 
         grid.addComponent(mainMenuPanel);
@@ -103,9 +103,9 @@ public class InstitutionList extends VerticalLayout implements View {
         setHeight("100%");
         setWidth("100%");
 
-        if(MainSystem.getUserID() == 0 || !MainSystem.getUserType().equals("client")){
-            UI.getCurrent().getNavigator().navigateTo("clientLogin");
-        }
+//        if(MainSystem.getUserID() == 0 || !MainSystem.getUserType().equals("client")){
+//            UI.getCurrent().getNavigator().navigateTo("clientLogin");
+//        }
     }
 
 }

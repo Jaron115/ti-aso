@@ -23,8 +23,9 @@ public class Index extends VerticalLayout implements View {
         grid.setColumnExpandRatio(2,1);
 
         //Panel - index
-        Panel loginPanel = new Panel("Strona główna");
-        loginPanel.setWidth("100%");
+        Panel indexPanel = new Panel("Witamy w ASO samochodowym");
+        indexPanel.setWidth("100%");
+        indexPanel.setStyleName("dataListHolder");
 
         //Panel - guest menu
         MainMenu mainMenu = new MainMenu();
@@ -47,12 +48,12 @@ public class Index extends VerticalLayout implements View {
         VerticalLayout menuLayoutEmployee = employeeMenu.EmployeenMenuLayout();
         menuLayoutEmployee.setSpacing(false);
         Panel employeeMenuPanel = new Panel("Panel pracownika", menuLayoutEmployee);
-        clientMenuPanel.setWidth("100%");
-        clientMenuPanel.setStyleName("employeeMenuPanel");
+        employeeMenuPanel.setWidth("100%");
+        employeeMenuPanel.setStyleName("employeeMenuPanel");
 
 
         grid.addComponent(mainMenuPanel);
-        grid.addComponent(loginPanel);
+        grid.addComponent(indexPanel);
 
         if(Objects.equals(MainSystem.getUserType(), "client")){
             grid.addComponent(clientMenuPanel);

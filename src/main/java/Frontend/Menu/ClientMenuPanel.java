@@ -71,7 +71,7 @@ public class ClientMenuPanel extends VerticalLayout implements View {
 
             Page.getCurrent().reload();
 
-            UI.getCurrent().getNavigator().navigateTo("clientRegister");
+            UI.getCurrent().getNavigator().navigateTo("index");
         });
 
         menuLayout.addComponent(logout);

@@ -92,7 +92,7 @@ public class MyUI extends UI {
 
         //Begin login view
         if (navigator.getState().isEmpty()) {
-            navigator.navigateTo("clientRegister");
+            navigator.navigateTo("index");
         }
     }
 

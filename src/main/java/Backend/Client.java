@@ -16,4 +16,8 @@ public class Client extends User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getClientData(){
+        return this.getName() + " " + this.getLastName();
+    }
 }

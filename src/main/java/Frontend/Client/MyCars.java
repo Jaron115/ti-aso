@@ -43,7 +43,7 @@ public class MyCars extends VerticalLayout implements View{
 
         assert carData != null;
 
-        //region --------------------START MY REPAIRS - TAB 1------------------------
+        //region --------------------START MY CAR - TAB 1------------------------
 
         //Table - my cars
 
@@ -60,9 +60,9 @@ public class MyCars extends VerticalLayout implements View{
 
         carDataGrid.setItems(carData);
 
-        //endregion --------------------END MY REPAIRS - TAB 1------------------------
+        //endregion --------------------END MY CAR - TAB 1------------------------
 
-        //region --------------------START MY REPAIRS - TAB 2------------------------
+        //region --------------------START MY CAR - TAB 2------------------------
 
         //Add car - my cars
 
@@ -143,9 +143,9 @@ public class MyCars extends VerticalLayout implements View{
             }
         });
 
-        //endregion --------------------END MY REPAIRS - TAB 2------------------------
+        //endregion --------------------END MY CAR - TAB 2------------------------
 
-        //region --------------------START MY REPAIRS - TAB 3------------------------
+        //region --------------------START MY CAR - TAB 3------------------------
 
         //Update car - my cars
 
@@ -262,9 +262,9 @@ public class MyCars extends VerticalLayout implements View{
 
         });
 
-        //endregion --------------------END MY REPAIRS - TAB 3------------------------
+        //endregion --------------------END MY CAR - TAB 3------------------------
 
-        //region --------------------START MY REPAIRS - TAB 4------------------------
+        //region --------------------START MY CAR - TAB 4------------------------
 
         //Delete car - my cars
 
@@ -315,21 +315,21 @@ public class MyCars extends VerticalLayout implements View{
             }
         });
 
-        //endregion --------------------END MY REPAIRS - TAB 4------------------------
+        //endregion --------------------END MY CAR - TAB 4------------------------
 
         //Tabs - my repairs view
-        TabSheet repairsTabs = new TabSheet();
+        TabSheet carsTabs = new TabSheet();
 
-        repairsTabs.setWidth("100%");
-        repairsTabs.addStyleName("tabsHeader");
+        carsTabs.setWidth("100%");
+        carsTabs.addStyleName("tabsHeader");
 
-        repairsTabs.addTab(carDataGrid).setCaption("Moje pojazdy");
-        repairsTabs.addTab(formLayout).setCaption("Dodaj pojazd");
-        repairsTabs.addTab(formLayoutUpdate).setCaption("Aktualizuj pojazd");
-        repairsTabs.addTab(formLayoutDelete).setCaption("Usuń pojazd");
+        carsTabs.addTab(carDataGrid).setCaption("Moje pojazdy");
+        carsTabs.addTab(formLayout).setCaption("Dodaj pojazd");
+        carsTabs.addTab(formLayoutUpdate).setCaption("Aktualizuj pojazd");
+        carsTabs.addTab(formLayoutDelete).setCaption("Usuń pojazd");
 
         //Panel - my repairs
-        Panel institutionListPanel = new Panel("Moje pojazdy", repairsTabs);
+        Panel institutionListPanel = new Panel("Moje pojazdy", carsTabs);
         institutionListPanel.setWidth("100%");
         institutionListPanel.setStyleName("dataListHolder");
 
@@ -356,8 +356,8 @@ public class MyCars extends VerticalLayout implements View{
         VerticalLayout menuLayoutEmployee = employeeMenu.EmployeenMenuLayout();
         menuLayoutEmployee.setSpacing(false);
         Panel employeeMenuPanel = new Panel("Panel pracownika", menuLayoutEmployee);
-        clientMenuPanel.setWidth("100%");
-        clientMenuPanel.setStyleName("employeeMenuPanel");
+        employeeMenuPanel.setWidth("100%");
+        employeeMenuPanel.setStyleName("employeeMenuPanel");
 
 
         grid.addComponent(mainMenuPanel);
@@ -379,9 +379,9 @@ public class MyCars extends VerticalLayout implements View{
         setHeight("100%");
         setWidth("100%");
 
-        if(MainSystem.getUserID() == 0 || !MainSystem.getUserType().equals("client")){
-            UI.getCurrent().getNavigator().navigateTo("clientLogin");
-        }
+//        if(MainSystem.getUserID() == 0 || !MainSystem.getUserType().equals("client")){
+//            UI.getCurrent().getNavigator().navigateTo("clientLogin");
+//        }
     }
 
 }
