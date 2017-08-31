@@ -14820,14 +14820,14 @@ div.v-layout.v-horizontal.v-widget {
 	height: auto;
 }
 
-.mytheme .clientPanel .v-textfield, .mytheme .clientPanel .v-filterselect-input, .mytheme .employeePanel .v-textfield, .mytheme .employeePanel .v-filterselect-input, .mytheme .registerPanel .v-textfield, .mytheme .registerPanel .v-filterselect-input {
+.mytheme .clientPanel .v-textfield, .mytheme .clientPanel .v-textarea, .mytheme .clientPanel .v-filterselect-input, .mytheme .employeePanel .v-textfield, .mytheme .employeePanel .v-textarea, .mytheme .employeePanel .v-filterselect-input, .mytheme .registerPanel .v-textfield, .mytheme .registerPanel .v-textarea, .mytheme .registerPanel .v-filterselect-input {
 	border: 1px solid #d8d8d8;
 	padding: 15px 10px;
 	border-radius: 8px;
 	height: auto;
 }
 
-.mytheme .clientPanel .v-textfield:focus, .mytheme .clientPanel .v-filterselect-input:focus, .mytheme .employeePanel .v-textfield:focus, .mytheme .employeePanel .v-filterselect-input:focus, .mytheme .registerPanel .v-textfield:focus, .mytheme .registerPanel .v-filterselect-input:focus {
+.mytheme .clientPanel .v-textfield:focus, .mytheme .clientPanel .v-textarea:focus, .mytheme .clientPanel .v-filterselect-input:focus, .mytheme .employeePanel .v-textfield:focus, .mytheme .employeePanel .v-textarea:focus, .mytheme .employeePanel .v-filterselect-input:focus, .mytheme .registerPanel .v-textfield:focus, .mytheme .registerPanel .v-textarea:focus, .mytheme .registerPanel .v-filterselect-input:focus {
 	border: 1px solid #d8d8d8;
 	box-shadow: none;
 }
@@ -15018,14 +15018,14 @@ div.v-layout.v-horizontal.v-widget {
 	margin: 5px 0;
 }
 
-.mytheme .dataListHolder .v-textfield, .mytheme .dataListHolder .v-filterselect-input {
+.mytheme .dataListHolder .v-textfield, .mytheme .dataListHolder .v-textarea, .mytheme .dataListHolder .v-filterselect-input {
 	border: 1px solid #d8d8d8;
 	padding: 15px 10px;
 	border-radius: 8px;
 	height: auto;
 }
 
-.mytheme .dataListHolder .v-textfield:focus, .mytheme .dataListHolder .v-filterselect-input:focus {
+.mytheme .dataListHolder .v-textfield:focus, .mytheme .dataListHolder .v-textarea:focus, .mytheme .dataListHolder .v-filterselect-input:focus {
 	border: 1px solid #d8d8d8;
 	box-shadow: none;
 }

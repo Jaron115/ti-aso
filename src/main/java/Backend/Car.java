@@ -69,4 +69,11 @@ public class Car {
     public String carData(){
         return "Samochód: " + this.brand + " " + this.model + " Rok: " + this.year + " Kolor: " + this.color;
     }
+
+    public String getClientData(){
+        return this.client.getName() + " " + this.client.getLastName();
+    }
+    public String getClientDataWithCarData(){
+        return this.client.getName() + " " + this.client.getLastName() + " Samochód: " + this.brand + " " + this.model + " Rok: " + this.year + " Kolor: " + this.color;
+    }
 }

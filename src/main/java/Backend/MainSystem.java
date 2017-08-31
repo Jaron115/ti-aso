@@ -417,6 +417,57 @@ public class MainSystem {
         db.closeConnection();
     }
 
+         /*
+    GET CAR DATA
+     */
+
+    public List<Car> getCarsData() throws SQLException {
+        DbConnection db = new DbConnection();
+        List<Car> carList = new ArrayList<>();
+
+        ResultSet rs = db.Select("*", "Pojazd p INNER JOIN Klient k ON p.id_klienta = k.id", "");
+
+        while(rs.next()){
+
+            carList.add( new Car(
+                    rs.getInt("p.id"),
+                    rs.getString("p.marka"),
+                    rs.getString("p.model"),
+                    rs.getString("p.rok_produkcji"),
+                    rs.getString("p.kolor"),
+                    new Client(
+                            rs.getInt("k.id"),
+                            rs.getString("k.imie"),
+                            rs.getString("k.nazwisko"),
+                            rs.getString("k.adres"),
+                            rs.getString("k.email"),
+                            rs.getString("k.login"),
+                            rs.getString("k.haslo")
+                    )
+            ));
+        }
+
+        db.closeConnection();
+
+        return carList;
+    }
+
+    /*
+    DELETE CAR DATA
+     */
+
+    public void deleteCarData(int id) throws SQLException {
+        clientRepairDeleteByCar(id);
+
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Pojazd",
+                "id = '" + id + "'"
+        );
+
+        db.closeConnection();
+    }
 
     /*
     UPDATE CURRENT CLIENT DATA
@@ -651,7 +702,7 @@ public class MainSystem {
 
         db.Delete(
                 "Naprawa",
-                "id_pojazdu = '" + carId + "' AND id_klienta = '" + getUserID() + "'"
+                "id_pojazdu = '" + carId + "'"
         );
 
         db.closeConnection();
