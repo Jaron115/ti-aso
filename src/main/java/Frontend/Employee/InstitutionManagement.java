@@ -312,7 +312,7 @@ public class InstitutionManagement extends VerticalLayout implements View {
         institutionTabs.addTab(formLayoutDelete).setCaption("Usunięcie placówki");
 
         //Panel - my repairs
-        Panel institutionListPanel = new Panel("Moje pojazdy", institutionTabs);
+        Panel institutionListPanel = new Panel("Zarządzanie placówkami", institutionTabs);
         institutionListPanel.setWidth("100%");
         institutionListPanel.setStyleName("dataListHolder");
 

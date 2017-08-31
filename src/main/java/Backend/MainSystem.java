@@ -311,6 +311,54 @@ public class MainSystem {
     }
 
     /*
+    ADD SERVICE
+     */
+
+    public void serviceAdd(String name, String price, String description) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Insert(
+                "Usluga",
+                "nazwa, opis, cena",
+                "'" + name + "', '" + price + "', '" + description + "'"
+        );
+
+
+        db.closeConnection();
+    }
+
+    /*
+    UPDATE SERVICE
+     */
+
+    public void serviceUpdate(int id, String name, String price, String description) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Update(
+                "Usluga",
+                "nazwa = '" + name + "', opis = '" + description + "', cena = '" + price + "'",
+                "id = '" + id + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
+    DELETE SERVICE
+     */
+
+    public void serviceDelete(int id) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Usluga",
+                "id = '" + id + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
     UPDATE CLIENT CAR
      */
 
