@@ -100,4 +100,12 @@ public class Repair {
     public String getRepairData(){
         return "Usługa: " + this.service.getName() + " Pojazd: " + this.car.getBrand() + " " + this.car.getModel() + " Data: " + this.date;
     }
+
+    public String getClientData(){
+        return this.client.getName() + " " + this.client.getLastName();
+    }
+
+    public String getRepairDataWithClient(){
+        return this.client.getName() + " " + this.client.getLastName() + " Usługa: " + this.service.getName() + " Pojazd: " + this.car.getBrand() + " " + this.car.getModel() + " Data: " + this.date;
+    }
 }

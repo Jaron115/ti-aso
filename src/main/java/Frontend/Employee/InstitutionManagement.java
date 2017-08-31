@@ -298,7 +298,7 @@ public class InstitutionManagement extends VerticalLayout implements View {
             }
         });
 
-        //endregion --------------------END MY CAR - TAB 4------------------------
+        //endregion --------------------END INSTITUTION MANAGEMENT - TAB 4------------------------
 
         //Tabs - my repairs view
         TabSheet institutionTabs = new TabSheet();

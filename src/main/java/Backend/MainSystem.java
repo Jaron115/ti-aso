@@ -714,6 +714,100 @@ public class MainSystem {
     }
 
      /*
+    GET CLIENT REPAIR DATA
+     */
+
+    public List<Repair> getRepairDataFromDatabaseAll() throws SQLException {
+        DbConnection db = new DbConnection();
+        List<Repair> repairList = new ArrayList<>();
+        ResultSet rs = db.Select("*", "Naprawa n INNER JOIN Klient k ON n.id_klienta = k.id INNER JOIN Usluga u ON n.id_uslugi = u.id INNER JOIN Pojazd p ON n.id_pojazdu = p.id INNER JOIN Placowka pl ON n.id_placowki = pl.id", "");
+
+        while(rs.next()){
+            repairList.add(
+                    new Repair(
+                            rs.getInt("n.id"),
+                            new Client(
+                                    rs.getInt("k.id"),
+                                    rs.getString("k.imie"),
+                                    rs.getString("k.nazwisko"),
+                                    rs.getString("k.adres"),
+                                    rs.getString("k.email"),
+                                    rs.getString("k.login"),
+                                    rs.getString("k.haslo")
+                            ),
+                            new Service(
+                                    rs.getInt("u.id"),
+                                    rs.getString("u.nazwa"),
+                                    rs.getString("u.opis"),
+                                    rs.getString("u.cena")
+                            ),
+                            new Car(
+                                    rs.getInt("p.id"),
+                                    rs.getString("p.marka"),
+                                    rs.getString("p.model"),
+                                    rs.getString("p.rok_produkcji"),
+                                    rs.getString("p.kolor"),
+                                    new Client(
+                                            rs.getInt("k.id"),
+                                            rs.getString("k.imie"),
+                                            rs.getString("k.nazwisko"),
+                                            rs.getString("k.adres"),
+                                            rs.getString("k.email"),
+                                            rs.getString("k.login"),
+                                            rs.getString("k.haslo")
+                                    )
+                            ),
+                            new Institution(
+                                    rs.getInt("pl.id"),
+                                    rs.getString("pl.nazwa"),
+                                    rs.getString("pl.opis"),
+                                    rs.getString("pl.adres")
+                            ),
+                            rs.getString("n.data_naprawy"),
+                            rs.getString("n.status"),
+                            rs.getString("n.opis_naprawy")
+                    )
+            );
+        }
+
+        db.closeConnection();
+
+        return repairList;
+    }
+
+    /*
+    UPDATE REPAIR
+     */
+
+    public void repairUpdate(int id, String status) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Update(
+                "Naprawa",
+                "status = '" + status + "'",
+                "id = '" + id + "'"
+        );
+
+        db.closeConnection();
+    }
+
+    /*
+    DELETE REPAIR
+     */
+
+    public void repairDelete(int id) throws SQLException {
+        DbConnection db = new DbConnection();
+
+        db.Delete(
+                "Naprawa",
+                "id = '" + id + "'"
+        );
+
+        db.closeConnection();
+    }
+
+
+     /*
     DELETE CLIENT CAR
      */
 

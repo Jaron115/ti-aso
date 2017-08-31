@@ -298,7 +298,7 @@ public class ServicesManagement extends VerticalLayout implements View {
             }
         });
 
-        //endregion --------------------END MY CAR - TAB 4------------------------
+        //endregion --------------------END SERVICE MANAGEMENT - TAB 4------------------------
 
         //Tabs - my repairs view
         TabSheet serviceTabs = new TabSheet();
