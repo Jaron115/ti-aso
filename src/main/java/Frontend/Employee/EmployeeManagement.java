@@ -74,7 +74,7 @@ public class EmployeeManagement extends VerticalLayout implements View {
         TextField employeeAddress = new TextField();
         TextField employeePosition = new TextField();
         TextField employeeLogin = new TextField();
-        TextField employeePaswword = new TextField();
+        PasswordField employeePaswword = new PasswordField();
         TextField employeeSalary = new TextField();
 
         //UI Elements - Button
@@ -192,7 +192,7 @@ public class EmployeeManagement extends VerticalLayout implements View {
         TextField employeeAddressUpdate = new TextField();
         TextField employeePositionUpdate = new TextField();
         TextField employeeLoginUpdate = new TextField();
-        TextField employeePaswwordUpdate = new TextField();
+        PasswordField employeePaswwordUpdate = new PasswordField();
         TextField employeeSalaryUpdate = new TextField();
 
         //UI Elements - Button
