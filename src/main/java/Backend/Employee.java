@@ -26,4 +26,8 @@ public class Employee extends User{
     public void setSalary(String salary) {
         this.salary = salary;
     }
+
+    public String getFullName(){
+        return this.getName() + " " + this.getLastName();
+    }
 }
