@@ -183,6 +183,11 @@
   .dataListHolder{
     padding: 30px !important;
 
+    .v-grid-header-deco, .v-grid-scroller-vertical{
+      background: transparent;
+      border: none;
+    }
+
     .v-panel-captionwrap{
       margin-top: 0!important;
 

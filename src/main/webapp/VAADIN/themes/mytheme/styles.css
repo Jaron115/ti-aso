@@ -14927,6 +14927,11 @@ div.v-layout.v-horizontal.v-widget {
 	padding: 30px !important;
 }
 
+.mytheme .dataListHolder .v-grid-header-deco, .mytheme .dataListHolder .v-grid-scroller-vertical {
+	background: transparent;
+	border: none;
+}
+
 .mytheme .dataListHolder .v-panel-captionwrap {
 	margin-top: 0 !important;
 }
